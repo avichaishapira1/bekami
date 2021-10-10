@@ -1,4 +1,4 @@
-﻿using bekami.Models;
+﻿using Bekami.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace bekami.Controllers
+namespace Bekami.Controllers
 {
     public class HomeController : Controller
     {
@@ -24,6 +24,16 @@ namespace bekami.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Stores()
+        {
+            return View();
+        }
+
+        public IActionResult Aboutus()
         {
             return View();
         }
