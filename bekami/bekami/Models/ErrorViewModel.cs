@@ -1,6 +1,6 @@
 using System;
 
-namespace bekami.Models
+namespace Bekami.Models
 {
     public class ErrorViewModel
     {
