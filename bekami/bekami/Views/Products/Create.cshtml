@@ -1,0 +1,68 @@
+﻿@model bekami.Models.Product
+@using bekami.Models
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+    <h1>Create</h1>
+    <hr />
+        <div class="row">
+            <div class="col-md-5">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Size" class="control-label"></label>
+                        <select asp-for="Size" asp-items="@Html.GetEnumSelectList(typeof(Size))" class="form-control">
+                            <option>Select size</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Sleeves" class="control-label"></label>
+                        <select asp-for="Sleeves" asp-items="@Html.GetEnumSelectList(typeof(Sleeve))" class="form-control">
+                            <option>Select sleeves</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsAvailable" /> @Html.DisplayNameFor(model => model.IsAvailable)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Imagepath" class="control-label"></label>
+                        <input asp-for="Imagepath" accept="image/png,image/jpeg" class="i-txt bg-input-txt" />  
+                        <span asp-validation-for="Imagepath" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CategoryId" class="control-label"></label>
+                        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                        <div class="text-center">
+                            Can't choose a category ? <a asp-controller="Categories" asp-action="Create">click here</a> to create a new category.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+
+   
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
