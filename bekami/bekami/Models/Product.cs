@@ -13,10 +13,10 @@ namespace bekami.Models
         L,
         XL,
     }
-    public enum Sleeve
+    public enum Gender
     {
-        Short,
-        Long
+        woman ,
+        man
     }
     public class Product
     {
@@ -27,10 +27,9 @@ namespace bekami.Models
         [EnumDataType(typeof(Size))]
         [Required]
         public Size Size { get; set; }
-        [EnumDataType(typeof(Sleeve))]
+        [EnumDataType(typeof(Gender))]
         [Required]
-        public Sleeve Sleeves { get; set; }
-
+        public Gender Gender { get; set; }
         [Required]
         public double Price { get; set; }
         [Display(Name = "Is available")]
@@ -39,11 +38,14 @@ namespace bekami.Models
         [Required]
         [DataType(DataType.ImageUrl)]
         public string Imagepath { get; set; }
+        [Display(Name = " Seconde image")]
+        public string Imagepath2 { get; set; }
+        [Required]
+        public string Description { get; set; }
 
-
-
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        [Display(Name = "Color")]
+        public int ColorId { get; set; }
+        public Color Color { get; set; }
         public IEnumerable<Tags> Tags { get; set; }
     }
 

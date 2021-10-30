@@ -7,6 +7,23 @@ namespace bekami.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Branch",
+                columns: table => new
+                {
+                    LocationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LocationLongitude = table.Column<double>(type: "float", nullable: false),
+                    LocationLatitude = table.Column<double>(type: "float", nullable: false),
+                    Openingtime = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Phonenumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Branch", x => x.LocationId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
@@ -17,6 +34,19 @@ namespace bekami.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Color",
+                columns: table => new
+                {
+                    ColorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Color", x => x.ColorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,20 +70,22 @@ namespace bekami.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Size = table.Column<int>(type: "int", nullable: false),
-                    Sleeves = table.Column<int>(type: "int", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false),
                     Imagepath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    Imagepath2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ColorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_Product_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
-                        principalColumn: "CategoryId",
+                        name: "FK_Product_Color_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Color",
+                        principalColumn: "ColorId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -82,9 +114,9 @@ namespace bekami.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryId",
+                name: "IX_Product_ColorId",
                 table: "Product",
-                column: "CategoryId");
+                column: "ColorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductTags_TagsTagId",
@@ -95,6 +127,12 @@ namespace bekami.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Branch");
+
+            migrationBuilder.DropTable(
+                name: "Category");
+
+            migrationBuilder.DropTable(
                 name: "ProductTags");
 
             migrationBuilder.DropTable(
@@ -104,7 +142,7 @@ namespace bekami.Migrations
                 name: "Tags");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Color");
         }
     }
 }
