@@ -10,22 +10,22 @@ using bekami.Models;
 
 namespace bekami.Controllers
 {
-    public class CategoriesController : Controller
+    public class ColorsController : Controller
     {
         private readonly bekamiContext _context;
 
-        public CategoriesController(bekamiContext context)
+        public ColorsController(bekamiContext context)
         {
             _context = context;
         }
 
-        // GET: Categories
+        // GET: Colors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Category.ToListAsync());
+            return View(await _context.Color.ToListAsync());
         }
 
-        // GET: Categories/Details/5
+        // GET: Colors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace bekami.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
-            if (category == null)
+            var color = await _context.Color
+                .FirstOrDefaultAsync(m => m.ColorId == id);
+            if (color == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(color);
         }
 
-        // GET: Categories/Create
+        // GET: Colors/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Colors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,Name")] Category category)
+        public async Task<IActionResult> Create([Bind("ColorId,Name")] Color color)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                _context.Add(color);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(color);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Colors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace bekami.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category.FindAsync(id);
-            if (category == null)
+            var color = await _context.Color.FindAsync(id);
+            if (color == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(color);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Colors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Name")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("ColorId,Name")] Color color)
         {
-            if (id != category.CategoryId)
+            if (id != color.ColorId)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace bekami.Controllers
             {
                 try
                 {
-                    _context.Update(category);
+                    _context.Update(color);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CategoryId))
+                    if (!ColorExists(color.ColorId))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace bekami.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(color);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Colors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace bekami.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
-            if (category == null)
+            var color = await _context.Color
+                .FirstOrDefaultAsync(m => m.ColorId == id);
+            if (color == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(color);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Colors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Category.FindAsync(id);
-            _context.Category.Remove(category);
+            var color = await _context.Color.FindAsync(id);
+            _context.Color.Remove(color);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool ColorExists(int id)
         {
-            return _context.Category.Any(e => e.CategoryId == id);
+            return _context.Color.Any(e => e.ColorId == id);
         }
     }
 }

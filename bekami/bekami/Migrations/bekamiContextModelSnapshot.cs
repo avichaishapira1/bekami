@@ -7,7 +7,7 @@ using bekami.Data;
 
 namespace bekami.Migrations
 {
-    [DbContext(typeof(bekamiContext))]
+    [DbContext(typeof(Data.bekamiContext))]
     partial class bekamiContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -33,6 +33,38 @@ namespace bekami.Migrations
                     b.ToTable("ProductTags");
                 });
 
+            modelBuilder.Entity("bekami.Models.Branch", b =>
+                {
+                    b.Property<int>("LocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("LocationLatitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("LocationLongitude")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Openingtime")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Phonenumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("LocationId");
+
+                    b.ToTable("Branch");
+                });
+
             modelBuilder.Entity("bekami.Models.Category", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -50,6 +82,22 @@ namespace bekami.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("bekami.Models.Color", b =>
+                {
+                    b.Property<int>("ColorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ColorId");
+
+                    b.ToTable("Color");
+                });
+
             modelBuilder.Entity("bekami.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -57,11 +105,21 @@ namespace bekami.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("ColorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("Imagepath")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Imagepath2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvailable")
@@ -77,12 +135,9 @@ namespace bekami.Migrations
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
-                    b.Property<int>("Sleeves")
-                        .HasColumnType("int");
-
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("ColorId");
 
                     b.ToTable("Product");
                 });
@@ -120,13 +175,13 @@ namespace bekami.Migrations
 
             modelBuilder.Entity("bekami.Models.Product", b =>
                 {
-                    b.HasOne("bekami.Models.Category", "Category")
+                    b.HasOne("bekami.Models.Color", "Color")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("ColorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("Color");
                 });
 #pragma warning restore 612, 618
         }

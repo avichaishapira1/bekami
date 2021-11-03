@@ -25,13 +25,27 @@ namespace bekami.Controllers
             var bekamiContext = _context.Product.Include(p => p.Color);
             return View(await bekamiContext.ToListAsync());
         }
-
-
-        // GET: shoppage
+        //showing only women t-shirts
+        [Route("/women")]
+        public async Task<IActionResult> Women()
+        {
+            var bekamiContext = _context.Product.Where(p => p.Gender == 0).Where(p => p.IsAvailable);
+            return View("Shop", await bekamiContext.ToListAsync());
+        }
+        //showing only men t-shirts 
+        [Route("/men")]
         public async Task<IActionResult> Men()
         {
-            var bekamiContext = _context.Product.Include(p => p.Color);
-            return View(await bekamiContext.ToListAsync());
+            var bekamiContext = _context.Product.Where(p => p.Gender != 0).Where(p => p.IsAvailable);
+            return View("Shop",await bekamiContext.ToListAsync());
+        }
+
+
+        [Route("/products/search")]
+        public async Task<IActionResult> Shop(String searchString)
+        {
+            var bekamiContext = _context.Product.Where(p => p.IsAvailable).Where(p=>p.Name.Contains(searchString));
+            return View("Shop", await bekamiContext.ToListAsync());
         }
 
         // GET: Products/Details/5

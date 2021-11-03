@@ -1,0 +1,31 @@
+﻿@model IEnumerable<bekami.Models.Product>
+
+@{
+    ViewData["Title"] = "Shop";
+}
+
+
+    <section>
+        <div class=" row row-cols-1 row-cols-md-2">
+            <div class="card-deck">
+
+                @foreach (var item in Model)
+                {
+                    <div class="card" style="width: 18rem;">
+                        <img src=@item.Imagepath class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                            <p class="card-text">
+                                @Html.DisplayFor(modelItem => item.Description)
+                                @Html.DisplayFor(modelItem => item.Tags)
+                            </p>
+                            <p class="card-text price">
+                                price: @Html.DisplayFor(modelItem => item.Price) $
+                            </p>
+                        </div>
+                        <a href="#" class="btn">Buy now</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>

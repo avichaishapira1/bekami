@@ -1,5 +1,8 @@
-﻿using Bekami.Models;
+﻿using bekami.Data;
+using bekami.Models;
+using Bekami.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,6 +14,7 @@ namespace Bekami.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly bekamiContext _dbContext;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -28,20 +32,23 @@ namespace Bekami.Controllers
             return View();
         }
 
-        public IActionResult Stores()
-        {
-            return View();
-        }
 
         public IActionResult Aboutus()
         {
             return View();
         }
 
+        public IActionResult Stores()
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+
     }
 }

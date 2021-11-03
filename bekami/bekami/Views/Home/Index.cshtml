@@ -1,24 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
     <div class="bd-example">
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel" data-slide-to="1"></li>
-                <li data-target="#carousel" data-slide-to="2"></li>
+                <li data-target="#carousel" data-slide-to="1" class="active"></li>
+                <li data-target="#carousel" data-slide-to="2" class="active"></li>
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <video autoplay loop muted class="d-block w-100 rounded">
+                    <video autoplay loop muted  class="d-block w-100 rounded">
                         <source src="~/images and banners/Banner3.mp4" type="video/mp4" class="d-block " />
                     </video>
                     <div class="carousel-caption d-none d-md-block">
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <video autoplay loop muted class="d-block w-100 rounded">
+                    <video autoplay loop muted  class="d-block w-100 rounded">
                         <source src="~/images and banners/Banner.mp4" type="video/mp4" class="d-block " />
                     </video>
                     <div class="carousel-caption d-none d-md-block">
@@ -27,7 +26,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <video autoplay loop muted class="d-block w-100 rounded">
+                    <video autoplay loop muted  class="d-block w-100 rounded">
                         <source src="~/images and banners/astrobanner.mp4" type="video/mp4" class="d-block " />
                     </video>
                     <div class="carousel-caption d-none d-md-block">
@@ -45,37 +44,8 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
-<hr>
-    <section id="department" class="content">
-        <div class="department">
-            <il class="auto-grid" role="list">
-                <il>
-                    <a  class="profile">
-                        <h2>Women</h2>
-                        <img alt="Women" src="~/images and banners/Women.jpg" />
-                    </a>
-                </il>
-                <il>
-                    <a class="profile">
-                        <h2>Men</h2>
-                        <img alt="Men" src="~/images and banners/Men.jpg" />
-                    </a>
-                </il>
-                <il>
-                    <a class="profile">
-                        <h2>Kids</h2>
-                        <img alt="Kid" src="~/images and banners/kids.jpg" />
-                    </a>
-                </il>
-            </il>
-        </div>
-    </section>
-</div>
-
-<hr >
-
-
+    </div>
+<hr />
 <section>
     <div class="content">
         <div class="container">
@@ -84,15 +54,24 @@
                     <div id="fb-root"></div>
                     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=1248358382254176&autoLogAppEvents=1" nonce="mxfpxb6W"></script>
                     <div class="fb-page" data-href="https://www.facebook.com/bekamiparis/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                    <blockquote cite="https://www.facebook.com/bekamiparis/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/bekamiparis/">Bekami</a></blockquote></div>
-                </div>
-            </div>
-            <div class="h-100 d-flex justify-content-center align-items-center border-primary px-3 py-5">
-                <div class="sec-title text-center">
-                <h3>Get updates on our new collections.</h3>
-                <input type="text" placeholder="Enter Email" />
-                <button type="submit" class="registerbtn">submit</button>
+                        <blockquote cite="https://www.facebook.com/bekamiparis/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/bekamiparis/">Bekami</a></blockquote>
                     </div>
+                </div>
+
+                <div class="col-lg-6 pr-lg-5 mb-5 mb-lg-0">
+                    <div class="h-100 d-flex justify-content-center align-items-center border-primary px-3 py-5">
+                        <div class="sec-title text-center">
+                            <h3>Get updates on our new collections.</h3>
+                            <input type="text" placeholder="Enter Email" />
+                            <button type="submit" class="registerbtn">submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg">
+                
+
+                </div>
+
             </div>
         </div>
     </div>
