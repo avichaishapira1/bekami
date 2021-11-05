@@ -21,8 +21,7 @@ namespace bekami.Models
 
     public class Order
     {
-        [DisplayName("ID")]
-        public int OrderId { get; set; }
+        [DisplayName("ID")] public int OrderId { get; set; }
 
         [DisplayName("Date")]
         [DataType(DataType.DateTime)]
@@ -38,16 +37,15 @@ namespace bekami.Models
         [DisplayName("Items")]
         public int NumOfItems { get; set; }
 
-        [DisplayName("Order status")]
-        public OrderStatus Status { get; set; }
-        
-        public User AssociatedUser  { get; set; }
+        [DisplayName("Order status")] public OrderStatus Status { get; set; }
+
+        public User AssociatedUser { get; set; }
 
         public ICollection<OrderProduct> ProductsOrdered { get; set; }
-        
-        [DisplayName("Address")]
+
+        [DisplayName("Address")] 
         public String Address { get; set; }
 
 
-        
+    }
 }

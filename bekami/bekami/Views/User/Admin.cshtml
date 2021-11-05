@@ -1,0 +1,104 @@
+@model IEnumerable<bekami.Models.User>
+
+@{ ViewData["Title"] = "Users Management";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="container">
+    <h4>Users</h4>
+    <form asp-action="Filter" id="filterform">
+        <div class="form-box f-right">
+            <input id="filter" name="term" autocomplete="off" class="form-control" placeholder="search names..." />
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Role)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Role)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Created)
+    </td>
+    <td>
+        <a class="black-color" asp-action="Edit" asp-route-id="@item.UserId">Edit</a>|
+        <a class="black-color" asp-action="Details" asp-route-id="@item.UserId">Details</a>|
+        <a class="black-color" asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+    </td>
+</tr>            }
+        </tbody>
+    </table>
+
+
+</div>
+
+@section Scripts{
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script src="~/js/filter.js"></script>
+
+    <script id="restuls" type="text/html">
+        <tr>
+            <td>
+                ${userId}
+            </td>
+            <td>
+                ${firstname}
+            </td>
+            <td>
+                ${lastname}
+            </td>
+            <td>
+                ${email}
+            </td>
+            <td>
+                ${type}
+            </td>
+            <td>
+                ${registrationdate}
+            </td>
+            <td>
+                <a class="black-color" href="/Users/Edit/${id}">Edit</a>|
+                <a class="black-color" href="/Users/Details/${id}">Details</a>|
+                <a class="black-color" href="/Users/Delete/${id}">Delete</a>
+            </td>
+        </tr>
+    </script>
+}
+

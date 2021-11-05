@@ -1,0 +1,63 @@
+@model bekami.Models.User
+
+@{ ViewData["Title"] = "Edit My User";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+
+<div class="container">
+    <h4>Edit User Details</h4>
+    <hr />
+    <div class="billing_details">
+        <div class="row">
+            <div class="col-lg-8" style="background:#f7f7f7;">
+                <br />
+                <i style="font-size:14px; color: #415094; font-weight: 500;">Edit User</i>
+
+                <form id="DetailsForm" class="row contact_form" asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="UserId" />
+                    <input type="hidden" asp-for="Created" />
+                    <div class="col-md-12 form-group">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <input asp-for="FirstName" class="form-control" placeholder="First name">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <input asp-for="LastName" class="form-control" placeholder="Last name">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <input asp-for="Email" class="form-control" placeholder="Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <input asp-for="Password" class="form-control" placeholder="Password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password">
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

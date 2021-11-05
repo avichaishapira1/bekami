@@ -49,7 +49,7 @@ namespace bekami.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        public Role Type { get; set; }
+        public Role Role { get; set; }
 
         [DataType(DataType.DateTime)]
         [DisplayName("Registration date")]
