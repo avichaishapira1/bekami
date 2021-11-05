@@ -44,7 +44,7 @@ namespace bekami.Controllers
         [Route("/products/search")]
         public async Task<IActionResult> Shop(String searchString)
         {
-            var bekamiContext = _context.Product.Where(p => p.IsAvailable).Where(p=>p.Name.Contains(searchString));
+            var bekamiContext = _context.Product.Where(p => p.IsAvailable).Where(p=>p.Name.Contains(searchString) || p.Description.Contains(searchString));
             return View("Shop", await bekamiContext.ToListAsync());
         }
 
