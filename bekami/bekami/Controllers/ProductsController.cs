@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using bekami.Data;
 using bekami.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace bekami.Controllers
 {
@@ -58,7 +59,7 @@ namespace bekami.Controllers
 
             var product = await _context.Product
                 .Include(p => p.Color)
-                .FirstOrDefaultAsync(m => m.ProductId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -115,7 +116,7 @@ namespace bekami.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Size,Gender,Price,IsAvailable,Imagepath,Imagepath2,Description,ColorId")] Product product)
         {
-            if (id != product.ProductId)
+            if (id != product.Id)
             {
                 return NotFound();
             }
@@ -129,7 +130,7 @@ namespace bekami.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.ProductId))
+                    if (!ProductExists(product.Id))
                     {
                         return NotFound();
                     }
@@ -154,7 +155,7 @@ namespace bekami.Controllers
 
             var product = await _context.Product
                 .Include(p => p.Color)
-                .FirstOrDefaultAsync(m => m.ProductId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -176,7 +177,13 @@ namespace bekami.Controllers
 
         private bool ProductExists(int id)
         {
-            return _context.Product.Any(e => e.ProductId == id);
+            return _context.Product.Any(e => e.Id == id);
+        }
+        
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Admin()
+        {
+            return View(await _context.Product.Where(p => p.Name != "Not Found").Include(i => i.Color).ToListAsync());
         }
     }
 }

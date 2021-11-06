@@ -1,0 +1,131 @@
+﻿@model IEnumerable<bekami.Models.Product>
+@{ ViewData["Title"] = "Products Admin"; }
+
+
+<div class="container" style="max-width:1370px;">
+    <h4>Products</h4>
+    <a class="black-color" asp-action="Create">Create New Product</a>
+    <div class="cart_inner">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th style="width: 9%;">
+                            @Html.DisplayNameFor(model => model.Price)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Color)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Gender)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsAvailable)
+                        </th>
+                        <th style="width: 9%;">
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!--================Items Area =================-->
+                    @foreach (var item in Model)
+                    {
+
+        <tr class="@item.Id">
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                <div class="media">
+                    <div class="d-flex">
+                        <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id"> <img src="@Html.DisplayFor(modelItem => item.Imagepath)" alt="">  </a>
+                    </div>
+                    <div class="media-body">
+                        <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id"> <p>@Html.DisplayFor(modelItem => item.Name) <br /> @Html.DisplayFor(modelItem => item.Description)</p>  </a>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Color.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+            </td>
+            <td>
+                <a class="black-color" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="black-color" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="black-color" asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a class="tweet" id="@item.Id" href="#"><i class="fab fa-twitter"></i></a>
+            </td>
+        </tr>}
+                    <!--================Items Area END =================-->
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script src="~/js/filter.js"></script>
+    <script src="~/js/tweet.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    <script id="results" type="text/html">
+        <tr class=" ${id}">
+            <td>
+                ${id}
+            </td>
+
+            <td>
+                <div class="media">
+                    <div class="d-flex">
+                        <a href="/Products/Details/${id}"> <img src="${img}" alt="">  </a>
+                    </div>
+                    <div class="media-body">
+                        <a href="/Products/Details/${id}"> <p>${name} <br /> ${description}</p>  </a>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                ₪${price}
+            </td>
+
+            <td>
+                ${brand}
+            </td>
+            <td>
+                ${category}
+            </td>
+            <td>
+                <input type="checkbox" disabled checked="${instock}" />
+            </td>
+    
+            <td>
+                <a class="black-color" href="/Products/Edit/${id}">Edit</a>|
+                <a class="black-color" href="/Products/Details/${id}">Details</a>|
+                <a class="black-color" href="/Products/Delete/${id}">Delete</a>|
+                <a class="tweet" id="${id}" href="#"><i class="fab fa-twitter"></i></a>
+            </td>
+        </tr>
+    </script>
+}

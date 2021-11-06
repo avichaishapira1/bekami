@@ -1,0 +1,53 @@
+﻿@model IEnumerable<bekami.Models.Order>
+@{ ViewData["Title"] = "Orders"; }
+<!--================Page Area =================-->
+
+<div class="container">
+    <h4>My Orders</h4>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumOfItems)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Created)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Total)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumOfItems)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+
+    <td>
+        <a class="black-color" asp-action="MyOrderDetails" asp-route-id="@item.Id">Details</a>
+    </td>
+</tr>            }
+        </tbody>
+    </table>
+
+
+</div>
+
+

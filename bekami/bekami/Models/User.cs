@@ -57,8 +57,8 @@ namespace bekami.Models
         public DateTime Created { get; set; }
         
 
-        [DisplayName("Your orders")]
-        public ICollection<Order> Orders { get; set; }
+        //[DisplayName("Your orders")]
+        //public ICollection<Order> Orders { get; set; }
         
     }
 }

@@ -140,7 +140,7 @@ namespace bekami.Controllers
             var user = await _context.User.FindAsync(id);
 
             //delete his reviews & orders
-            _context.OrderProduct.RemoveRange(_context.OrderProduct.Where(p => p.OrderId.AssociatedUser == user));
+            _context.OrderProduct.RemoveRange(_context.OrderProduct.Where(p => p.Order.AssociatedUser == user));
             _context.Order.RemoveRange(_context.Order.Where(p => p.AssociatedUser == user));
 
             _context.User.Remove(user);
@@ -201,6 +201,7 @@ namespace bekami.Controllers
         ///////////////////////////
         // GET: Accounts/Register
         ///////////////////////////
+       // [Route("user/register")]
         public IActionResult Register()
         {
             //if already logged in
@@ -223,7 +224,7 @@ namespace bekami.Controllers
 
 
             //(Registration Field, Error Message)
-            //check if Email adress already exists.
+            //check if Email address already exists.
             if (_context.User.Any(i => i.Email == user.Email))
                 ModelState.AddModelError("Email", "Email address already registered to another account.");
             

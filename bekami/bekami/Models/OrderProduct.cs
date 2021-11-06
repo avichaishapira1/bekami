@@ -12,9 +12,12 @@ namespace bekami.Models
 
     public class OrderProduct
     {
-        public Order OrderId;
+        [DisplayName("ID")]
+        public int Id { get; set; }
+        
+        public Order Order;
 
-        public Product ProductId;
+        public Product Product;
 
         
         [DisplayName("Total")]
@@ -25,9 +28,6 @@ namespace bekami.Models
         [Range(0, int.MaxValue)]
         [DisplayName("Amount")]
         public int Quantity { get; set; }
-
         
-
-
     }
 }
