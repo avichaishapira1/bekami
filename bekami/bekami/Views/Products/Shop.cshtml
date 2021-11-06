@@ -1,31 +1,61 @@
 ﻿@model IEnumerable<bekami.Models.Product>
+@using bekami.Models
 
 @{
     ViewData["Title"] = "Shop";
 }
 
+<!--=Create a sort navbar =-->
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <select id="Size" class="select" asp-items="@ViewBag.Size">
+            <option value="null" disabled selected>Size</option>
+        </select>
 
-    <section>
-        <div class=" row row-cols-1 row-cols-md-2">
-            <div class="card-deck">
+        <select id="Gender" class="select" asp-items="@ViewBag.Gender">
+            <option value="null" disabled selected>Gender</option>
+        </select>
 
-                @foreach (var item in Model)
-                {
-                    <div class="card" style="width: 18rem;">
-                        <img src=@item.Imagepath class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-                            <p class="card-text">
-                                @Html.DisplayFor(modelItem => item.Description)
-                                @Html.DisplayFor(modelItem => item.Tags)
-                            </p>
-                            <p class="card-text price">
-                                price: @Html.DisplayFor(modelItem => item.Price) $
-                            </p>
-                        </div>
-                        <a href="#" class="btn">Buy now</a>
+        <select id="Color" class="select" asp-items="@ViewBag.ColorId">
+            <option value="null" disabled selected>select color</option>
+        </select>
+
+    </div>
+    <div class="select-this d-flex">
+        <select id="Sort" class="select">
+            <option value="null" disabled selected>Sort</option>
+            <option value="alphabetical">Alphabetical</option>
+            <option value="low2high">Price low to high</option>
+            <option value="high2low">Price high to low</option>
+        </select>
+    </div>
+</nav>
+
+
+<section>
+    <div class=" row row-cols-1 row-cols-md-2">
+        <div class="card-deck">
+
+            @foreach (var item in Model)
+            {
+                <div class="card" style="width: 18rem;">
+                    <img src=@item.Imagepath class="card-img-top">
+                    <div class="card-body">
+                        <a asp-action="ProductPage" asp-route-id="@item.ProductId">
+                            <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
+                        </a>
+                        <p class="card-text">
+                            @Html.DisplayFor(modelItem => item.Description)
+                            @Html.DisplayFor(modelItem => item.Tags)
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </p>
+                        <p class="card-text price">
+                            price: @Html.DisplayFor(modelItem => item.Price) ₪
+                        </p>
                     </div>
-                }
-            </div>
+                    <a>Buy now</a>
+                </div>
+            }
         </div>
-    </section>
+    </div>
+</section>

@@ -47,6 +47,11 @@ namespace bekami.Models
         public int ColorId { get; set; }
         public Color Color { get; set; }
         public IEnumerable<Tags> Tags { get; set; }
+
+        [Required]
+        [Display(Name = "Category")]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 
 }
