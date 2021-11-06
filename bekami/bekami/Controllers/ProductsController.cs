@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using bekami.Data;
 using bekami.Models;
 
+
 namespace bekami.Controllers
 {
     public class ProductsController : Controller
@@ -22,7 +23,7 @@ namespace bekami.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var bekamiContext = _context.Product.Include(p => p.Color);
+            var bekamiContext = _context.Product.Include(p => p.Color).Include(p => p.Category);
             return View(await bekamiContext.ToListAsync());
         }
         //showing only women t-shirts
@@ -30,6 +31,8 @@ namespace bekami.Controllers
         public async Task<IActionResult> Women()
         {
             var bekamiContext = _context.Product.Where(p => p.Gender == 0).Where(p => p.IsAvailable);
+            ViewData["ColorId"] = new SelectList(_context.Color, "ColorId", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "Name");
             return View("Shop", await bekamiContext.ToListAsync());
         }
         //showing only men t-shirts 
@@ -37,6 +40,8 @@ namespace bekami.Controllers
         public async Task<IActionResult> Men()
         {
             var bekamiContext = _context.Product.Where(p => p.Gender != 0).Where(p => p.IsAvailable);
+            ViewData["ColorId"] = new SelectList(_context.Color, "ColorId", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "Name");
             return View("Shop",await bekamiContext.ToListAsync());
         }
 
@@ -45,6 +50,8 @@ namespace bekami.Controllers
         public async Task<IActionResult> Shop(String searchString)
         {
             var bekamiContext = _context.Product.Where(p => p.IsAvailable).Where(p=>p.Name.Contains(searchString) || p.Description.Contains(searchString));
+            ViewData["ColorId"] = new SelectList(_context.Color, "ColorId", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "Name");
             return View("Shop", await bekamiContext.ToListAsync());
         }
 
@@ -57,7 +64,7 @@ namespace bekami.Controllers
             }
 
             var product = await _context.Product
-                .Include(p => p.Color)
+                .Include(p => p.Color).Include(p=>p.Category)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
             if (product == null)
             {
@@ -71,6 +78,7 @@ namespace bekami.Controllers
         public IActionResult Create()
         {
             ViewData["ColorId"] = new SelectList(_context.Color, "ColorId", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "Name");
             return View();
         }
 
@@ -79,7 +87,7 @@ namespace bekami.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,Size,Gender,Price,IsAvailable,Imagepath,Imagepath2,Description,ColorId")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,Size,Gender,Price,IsAvailable,Imagepath,Imagepath2,Description,ColorId,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -88,6 +96,7 @@ namespace bekami.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ColorId"] = new SelectList(_context.Color, "ColorId", "Name", product.ColorId);
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -105,6 +114,7 @@ namespace bekami.Controllers
                 return NotFound();
             }
             ViewData["ColorId"] = new SelectList(_context.Color, "ColorId", "Name", product.ColorId);
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -113,7 +123,7 @@ namespace bekami.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Size,Gender,Price,IsAvailable,Imagepath,Imagepath2,Description,ColorId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Size,Gender,Price,IsAvailable,Imagepath,Imagepath2,Description,ColorId,CategoryId")] Product product)
         {
             if (id != product.ProductId)
             {
@@ -141,6 +151,7 @@ namespace bekami.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ColorId"] = new SelectList(_context.Color, "ColorId", "Name", product.ColorId);
+            ViewData["Category"] = new SelectList(_context.Category, "CategoryId", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -153,7 +164,7 @@ namespace bekami.Controllers
             }
 
             var product = await _context.Product
-                .Include(p => p.Color)
+                .Include(p => p.Color).Include(p=>p.Category)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
             if (product == null)
             {
@@ -178,5 +189,22 @@ namespace bekami.Controllers
         {
             return _context.Product.Any(e => e.ProductId == id);
         }
+
+
+        public async Task<IActionResult> ProductPage(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _context.Product.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
     }
+
 }
