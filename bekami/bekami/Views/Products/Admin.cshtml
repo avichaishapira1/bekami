@@ -11,7 +11,7 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Id)
+                            @Html.DisplayNameFor(model => model.ProductId)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Name)
@@ -38,18 +38,18 @@
                     @foreach (var item in Model)
                     {
 
-        <tr class="@item.Id">
+        <tr class="@item.ProductId">
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.ProductId)
             </td>
 
             <td>
                 <div class="media">
                     <div class="d-flex">
-                        <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id"> <img src="@Html.DisplayFor(modelItem => item.Imagepath)" alt="">  </a>
+                        <a asp-action="Details" asp-controller="Products" asp-route-id="@item.ProductId"> <img src="@Html.DisplayFor(modelItem => item.Imagepath)" alt="">  </a>
                     </div>
                     <div class="media-body">
-                        <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id"> <p>@Html.DisplayFor(modelItem => item.Name) <br /> @Html.DisplayFor(modelItem => item.Description)</p>  </a>
+                        <a asp-action="Details" asp-controller="Products" asp-route-id="@item.ProductId"> <p>@Html.DisplayFor(modelItem => item.Name) <br /> @Html.DisplayFor(modelItem => item.Description)</p>  </a>
                     </div>
                 </div>
             </td>
@@ -68,10 +68,10 @@
                 @Html.DisplayFor(modelItem => item.IsAvailable)
             </td>
             <td>
-                <a class="black-color" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a class="black-color" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a class="black-color" asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                <a class="tweet" id="@item.Id" href="#"><i class="fab fa-twitter"></i></a>
+                <a class="black-color" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                <a class="black-color" asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                <a class="black-color" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a> |
+                <a class="tweet" id="@item.ProductId" href="#"><i class="fab fa-twitter"></i></a>
             </td>
         </tr>}
                     <!--================Items Area END =================-->

@@ -41,7 +41,7 @@
                 <div class="card" style="width: 18rem;">
                     <img src=@item.Imagepath class="card-img-top">
                     <div class="card-body">
-                        <a asp-action="ProductPage" asp-route-id="@item.Id">
+                        <a asp-action="ProductPage" asp-route-id="@item.ProductId">
                             <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
                         </a>
                         <p class="card-text">
