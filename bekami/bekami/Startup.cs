@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using bekami.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace bekami
 {
@@ -29,6 +31,15 @@ namespace bekami
 
             services.AddDbContext<bekamiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("bekamiContext")));
+            
+            //ADD 10Min Session Serivce :-)
+            services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(10));
+            //ADD Cookie Authentication Serivce :-)
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = new PathString("/Login");
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +57,8 @@ namespace bekami
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();

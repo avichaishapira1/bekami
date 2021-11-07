@@ -1,0 +1,110 @@
+﻿@model IEnumerable<bekami.Models.Order>
+@{ ViewData["Title"] = "Orders"; }
+
+
+<div class="container">
+    <h4>Orders</h4>
+    <form asp-action="Filter" id="filterform">
+        <div class="form-box f-right">
+            <input id="filter" name="term" autocomplete="off" class="form-control" placeholder="search..." />
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumOfItems)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AssociatedUser)
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Created)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Total)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumOfItems)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+        <a href="/Accounts/Details/@Html.DisplayFor(modelItem => item.AssociatedUser.Email)">@Html.DisplayFor(modelItem => item.AssociatedUser.Email)</a>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AssociatedUser.Email)
+    </td>
+
+    <td>
+        <a class="black-color" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        <a class="black-color" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+        <a class="black-color" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+</tr>            }
+        </tbody>
+    </table>
+
+
+</div>
+
+
+@section Scripts{
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script src="~/js/filter.js"></script>
+
+    <script id="restuls" type="text/html">
+        <tr>
+            <td>
+                ${id}
+            </td>
+            <td>
+                ${orderdate}
+            </td>
+            <td>
+                ₪ ${totalprice}
+            </td>
+            <td>
+                ${numofitems}
+            </td>
+            <td>
+                ${status}
+            </td>
+            <td>
+                <a href="/Accounts/Details/${id}">${username}</a>
+            </td>
+            <td>
+                ${email}
+            </td>
+            <td>
+                <a class="black-color" href="/Orders/Edit/${id}">Edit</a>|
+                <a class="black-color" href="/Orders/Details/${id}">Details</a>|
+                <a class="black-color" href="/Orders/Delete/${id}">Delete</a>
+            </td>
+        </tr>
+    </script>
+}

@@ -47,16 +47,41 @@
                         <div class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                             @if (Context.User.Identity.IsAuthenticated)
                             {
-                                <a class="dropdown-item">hello, @User.Identity.Name</a>
+                                <a class="dropdown-item">hello, @Context.User.Identity.Name</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">my orders</a>
                                 <a class="dropdown-item" href="#">my account</a>
+                                <div class="header-info-right">
+                                    <ul>
+                                        @if ((@Context.User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role))?.Value == "Admin")
+                                        {
+                                        <li class="nav-item">
+                                            <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="Admin">Accounts</a>
+                                        </li>
+                                                  
+                                                                    
+                                        <li class="nav-item">
+
+                                            <a class="nav-link  atext-light" asp-area="" asp-controller="Products" asp-action="Admin">Products</a>
+                                        </li>
+                                        <li class="nav-item">
+
+                                            <a class="nav-link  atext-light" asp-area="" asp-controller="Orders" asp-action="Admin">Orders</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link  atext-light" asp-area="" asp-controller="Stores" asp-action="Admin">Locations</a>
+                                        </li> }
+                                    </ul>
+                                </div>
+                                <li class="nav-item">
+                                    <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="Logout">Hello @Context.User.Claims.FirstOrDefault(c => c.Type == "Name")?.Value</a>
+                                </li>
                             }
                             else
                             {
-                                <a class="dropdown-item" asp-action="Register" asp-controller="users">Register</a>
+                                <a class="dropdown-item" asp-action="Register" asp-controller="User">Register</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" asp-action="Login" asp-controller="users">log in</a>
+                                <a class="dropdown-item" asp-action="Login" asp-controller="User">log in</a>
                             }
 
                         </div>

@@ -1,0 +1,112 @@
+﻿@model IEnumerable<bekami.Models.OrderProduct>
+@{ ViewData["Title"] = "Orders"; }
+<!--================Page Area =================-->
+
+<div class="container">
+    <div>
+        <h4>Order Shipping Details</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.First().Order.AssociatedUser)
+            </dt>
+            <dd class="col-sm-10">
+                <a href="/Accounts/Details/@Html.DisplayFor(model => model.First().Order.AssociatedUser)">  @Html.DisplayFor(model => model.First().Order.AssociatedUser)</a>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.First().Order.Created)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.First().Order.Created)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.First().Order.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.First().Order.Status)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.First().Order.AssociatedUser.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.First().Order.AssociatedUser.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.First().Order.AssociatedUser.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.First().Order.AssociatedUser.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.First().Order.AssociatedUser.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.First().Order.AssociatedUser.Email)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.First().Order.Id">Edit info</a> |
+        <a asp-action="Admin">Back to Orders</a>
+    </div>
+
+
+    <section class="cart_area section_padding">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.UnitPrice)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.Quantity)</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <!--================Items Area =================-->
+                            @foreach (var item in Model)
+                            {
+
+                <tr class="@item.Id">
+                    <td>
+                        <div class="media">
+                            <div class="d-flex">
+                                <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Product.ProductId"> <img src="@Html.DisplayFor(modelItem => item.Product.Imagepath)" alt="">  </a>
+                            </div>
+                            <div class="media-body">
+                                <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Product.ProductId"> <p>@Html.DisplayFor(modelItem => item.Product.Name)</p>  </a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>@Html.DisplayFor(modelItem => item.UnitPrice)</h5>
+                    </td>
+
+                    <td>
+                        <div class="mdb-select md-form" id="@item.Id">
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </div>
+
+                    </td>
+
+
+
+                    <td>
+                        <h5>₪@(item.UnitPrice * item.Quantity)</h5>
+                    </td>
+                </tr>}
+                            <!--================Items Area END =================-->
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
