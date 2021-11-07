@@ -17,9 +17,10 @@ namespace Bekami.Controllers
         private readonly bekamiContext _dbContext;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, bekamiContext _context)
         {
             _logger = logger;
+            _dbContext = _context;
         }
 
         public IActionResult Index()
@@ -38,9 +39,10 @@ namespace Bekami.Controllers
             return View();
         }
 
-        public IActionResult Stores()
+        public async Task<IActionResult> Stores()
         {
-            return View();
+            List<Branch> branches = await _dbContext.Branch.ToListAsync();
+            return View(branches);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
