@@ -14,6 +14,7 @@ namespace bekami.Data
         {
         }
         public DbSet<bekami.Models.User> User { get; set; }
+        public DbSet<bekami.Models.Branch> Branch { get; set; }
 
         public DbSet<bekami.Models.Product> Product { get; set; }
 

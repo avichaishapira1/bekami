@@ -140,8 +140,8 @@ namespace bekami.Controllers
             var user = await _context.User.FindAsync(id);
 
             //delete his reviews & orders
-            _context.OrderProduct.RemoveRange(_context.OrderProduct.Where(p => p.Order.AssociatedUser == user));
-            _context.Order.RemoveRange(_context.Order.Where(p => p.AssociatedUser == user));
+            _context.OrderProduct.RemoveRange(_context.OrderProduct.Where(p => p.Order.UserId == user));
+            _context.Order.RemoveRange(_context.Order.Where(p => p.UserId == user));
 
             _context.User.Remove(user);
             await _context.SaveChangesAsync();

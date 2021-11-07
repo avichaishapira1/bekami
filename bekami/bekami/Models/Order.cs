@@ -38,8 +38,8 @@ namespace bekami.Models
         public int NumOfItems { get; set; }
 
         [DisplayName("Order status")] public OrderStatus Status { get; set; }
-
-        public User AssociatedUser { get; set; }
+        [ForeignKey("User")]
+        public User UserId { get; set; }
 
         public ICollection<OrderProduct> ProductsOrdered { get; set; }
 

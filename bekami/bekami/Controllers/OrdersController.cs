@@ -36,7 +36,7 @@ namespace bekami.Controllers
             var accountEmail = User.Claims.FirstOrDefault(c => c.Type == "AccountEmail").Value;
             var user = await _context.User.FirstOrDefaultAsync(m => m.Email == accountEmail);
 
-            return View(await _context.Order.Where(i => i.AssociatedUser == user).ToListAsync());
+            return View(await _context.Order.Where(i => i.UserId == user).ToListAsync());
         }
 
         // show my order(order for specific account) get Detail ID!
@@ -53,7 +53,7 @@ namespace bekami.Controllers
                 return NotFound();
 
 
-            var order = await _context.Order.FirstOrDefaultAsync(m => (m.Id == id) && (m.AssociatedUser == user));
+            var order = await _context.Order.FirstOrDefaultAsync(m => (m.Id == id) && (m.UserId == user));
 
             if (order == null)
                 return NotFound();
@@ -97,7 +97,7 @@ namespace bekami.Controllers
 
             //return View(order);
             return View(await _context.OrderProduct.Where(i => i.Order == order)
-                .Include(c => c.Product).Include(c => c.Order.AssociatedUser).ToListAsync());
+                .Include(c => c.Product).Include(c => c.Order.UserId).ToListAsync());
         }
 
 
@@ -217,7 +217,7 @@ namespace bekami.Controllers
             var users = await _context.User.ToListAsync();
             var query = from order in orders
                         join user in users
-                        on order.AssociatedUser.UserId equals user.UserId
+                        on order.UserId.UserId equals user.UserId
                         select new
                         {
                             id = order.Id,
