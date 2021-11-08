@@ -1,0 +1,134 @@
+﻿@model IEnumerable<bekami.Models.CartItem>
+
+@{ ViewData["Title"] = "Your Shopping Cart"; }
+
+
+@{ if (!Model.Any())
+    { <!-- slider Area Start FOR EMPTY CART-->
+                        <div class="slider-area ">
+                            <!-- Mobile Menu -->
+                            <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="hero-cap text-center">
+                                                <h2>Your Shopping Cart Is Empty</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> }
+                    else
+                    { <!-- slider Area End--> <!-- slider Area Start-->
+                                        <div class="slider-area ">
+                                            <!-- Mobile Menu -->
+                                            <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-xl-12">
+                                                            <div class="hero-cap text-center">
+                                                                <h2>Your Shopping Cart</h2>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- slider Area End--> <!--================Cart Area =================-->
+                                                        <section class="cart_area section_padding">
+                                                            <div class="container">
+                                                                <div class="cart_inner">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col">Product</th>
+                                                                                    <th scope="col">@Html.DisplayNameFor(model => model.UnitPrice)</th>
+                                                                                    <th scope="col">@Html.DisplayNameFor(model => model.Quantity)</th>
+                                                                                    <th scope="col">Total</th>
+                                                                                </tr>
+                                                                            </thead>
+
+                                                                            <tbody>
+                                                                                <!--================Items Area =================-->
+                                                                                @foreach (var item in Model)
+                                                                                {
+
+                                                                <tr class="@item.Cart">
+                                                                    <td>
+                                                                        <div class="media">
+                                                                            <div class="d-flex">
+                                                                                <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Product.ProductId"> <img src="@Html.DisplayFor(modelItem => item.Product.Imagepath)" alt="">  </a>
+                                                                            </div>
+                                                                            <div class="media-body">
+                                                                                <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Product.ProductId"> <p>@Html.DisplayFor(modelItem => item.Product.Name)</p>  </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <h5>@Html.DisplayFor(modelItem => item.UnitPrice)</h5>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <select class="mdb-select md-form" id="@item.ItemId">
+                                                                            <option value="" disabled selected>@Html.DisplayFor(modelItem => item.Quantity)</option>
+                                                                            <option value="0">0</option>
+                                                                            <option value="1">1</option>
+                                                                            <option value="2">2</option>
+                                                                            <option value="3">3</option>
+                                                                            <option value="4">4</option>
+                                                                            <option value="5">5</option>
+                                                                        </select>
+
+                                                                    </td>
+
+
+
+                                                                    <td>
+                                                                        <h5>₪@(item.UnitPrice * item.Quantity)</h5>
+                                                                    </td>
+                                                                </tr>
+}
+                                                                                <!--================Items Area END =================-->
+                                                                                <!--================Lower Area =================-->
+                                                                                <tr class="bottom_button">
+                                                                                    <td>
+                                                                                        <a class="genric-btn danger radius" href="/ShoppingCarts/EmptyCart">Empty Cart</a>
+                                                                                    </td>
+                                                                                    <td></td>
+                                                                                    <td><h5>Total</h5></td>
+                                                                                    <td>
+                                                                                        <h5>₪@ViewBag.Total</h5>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="bottom_button">
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="cupon_text float-right">
+                                                                                            <a id="checkOut" class="btn_1" href="/ShoppingCarts/Checkout">Proceed to checkout</a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section> <!--================End Cart Area =================--> } }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+<script src="~/js/ShoppingCarts.js"></script>
+    }
+}
+
+
+
+
+
+
+
+

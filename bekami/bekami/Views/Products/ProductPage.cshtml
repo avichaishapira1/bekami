@@ -36,7 +36,7 @@
                         <!--=Buttons Area =-->
                         <div class="card_area">
                             <div class="add_to_cart">
-                                <a class="btn_3" id="addToCart" style="cursor: pointer;">Add To Cart</a>
+                                <a class="btn_3" asp-area="" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@Model.ProductId">Add To Cart</a>
                             </div>
                         </div>
 

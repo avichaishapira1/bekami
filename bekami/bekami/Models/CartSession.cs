@@ -8,27 +8,28 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using bekami.Models;
 
-namespace Bekami.Models
+namespace bekami.Models
 {
     public class CartSession
     {
-        public int Id { get; set; }
-        //acount sessionID used to bind cart to customer
+        [Key]
+        public int CartId { get; set; }
+        
         public String AccountSessionID { get; set; }
 
-        public ICollection<OrderProduct> Items { get; set; }
+        public ICollection<CartItem> Items { get; set; }
 
 
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:d}")]
         [DisplayName("Date created")]
-        public DateTime DateCreated { get; set; }
+        public DateTime Created { get; set; }
 
 
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:d}")]
         [DisplayName("Last modified")]
-        public DateTime LastModified { get; set; }
+        public DateTime LastUpdate { get; set; }
 
 
     }

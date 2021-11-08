@@ -1,0 +1,28 @@
+﻿@model IEnumerable<bekami.Models.CartItem>
+@{ //TBH
+    Layout = null; }
+
+<table class="table table-borderless" style="font-size:14px;">
+    <thead>
+        <tr style=" border-bottom: 1px solid #b0b0b0;">
+            <th scope="col" colspan="2">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total</th>
+        </tr>
+    </thead>
+
+    <tbody style="font-size:14px; color: #828bb2; font:small-caption;">
+        @foreach (var item in Model)
+        {
+<tr style="border-bottom: 1px solid #dddddd;">
+    <th colspan="2"><span>@item.Product.Name</span></th>
+    <th>x @item.Quantity</th>
+    <th> <span>@(item.UnitPrice *item.Quantity) </span></th>
+</tr>}
+
+        <tr style="font-size:14px; color: #415094; font-weight: 500;">
+            <th colspan="3">Total</th>
+            <th> <span>@ViewBag.Total</span></th>
+        </tr>
+    </tbody>
+</table>
