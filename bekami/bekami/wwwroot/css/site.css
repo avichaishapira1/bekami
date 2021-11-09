@@ -107,8 +107,6 @@ body {
   width: 100%;
   white-space: nowrap;
 }
-/*Search css design*/
-
 
 /*home page design*/
 
@@ -128,4 +126,9 @@ body {
 hr {
     clear: both;
     visibility: hidden;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
