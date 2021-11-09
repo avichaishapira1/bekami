@@ -166,7 +166,8 @@ namespace bekami.Controllers
             var cart = GetShoppingCart();
 
             //checking if ShoppingCart item for this product exists, If no => create CartItem and place inside ShoppingCart
-            var cartItem = _context.CartItem.Include(p => p.Product).FirstOrDefault(i => i.Cart.CartId == cart.CartId && i.Product.ProductId == productId);
+            var cartItem = _context.CartItem.Include(p => p.Product)
+                .Include(p => p.Cart).FirstOrDefault(i => i.Cart == cart);
             if (cartItem == null)
             {
                 //if reaced here: Products exists, CartItem doesnt => Create CartItem for this product!
@@ -290,7 +291,7 @@ namespace bekami.Controllers
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         ///Returns customer ShoppingCart according to GUID(uniqueID) placed in cookieI, f don't have one: create one! 
-        private CartSession GetShoppingCart()
+        private Cart GetShoppingCart()
         {
             //retrive GUID from cookie and look in DB for the ShoppingCart
             string cartGUID = HttpContext.Request.Cookies["ShoppingCartCookie"];
@@ -308,7 +309,7 @@ namespace bekami.Controllers
                 }
 
                 //create ShoppingCart assosiated with the GUID
-                customerShoppingCart = new CartSession { AccountSessionID = cartGUID, Created = DateTime.Now, LastUpdate = DateTime.Now };
+                customerShoppingCart = new Cart { AccountSessionID = cartGUID, Created = DateTime.Now, LastUpdate = DateTime.Now };
                 _context.Cart.Add(customerShoppingCart);
             }
             customerShoppingCart.LastUpdate = DateTime.Now;

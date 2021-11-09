@@ -6,7 +6,6 @@ using bekami.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using bekami.Data;
 using bekami.Models;
 
 namespace bekami.Controllers

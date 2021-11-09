@@ -10,14 +10,14 @@ using bekami.Models;
 
 namespace bekami.Models
 {
-    public class CartSession
+    public class Cart
     {
         [Key]
         public int CartId { get; set; }
         
         public String AccountSessionID { get; set; }
 
-        public ICollection<CartItem> Items { get; set; }
+        public virtual ICollection<CartItem> Items { get; set; }
 
 
         [DataType(DataType.DateTime)]

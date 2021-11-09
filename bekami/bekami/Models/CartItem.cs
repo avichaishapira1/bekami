@@ -8,15 +8,12 @@ using System.Threading.Tasks;
 
 namespace bekami.Models
 {
+    [Table("CartItem")]
     public class CartItem
     {
         [Key]
         public int ItemId { get; set; }
 
-        public CartSession Cart { get; set; }
-        
-        public Product Product { get; set; }
-        
         [Required]
         [DisplayName("Price")]
         [DataType(DataType.Currency)]
@@ -26,6 +23,13 @@ namespace bekami.Models
         [Required]
         public int Quantity { get; set; }
 
+        public virtual Cart Cart { get; set; }
+        
+        public virtual Product Product { get; set; }
+        
+        public int ProductId { get; set; }
+
+        public int CartId { get; set; }
 
     }
 }
