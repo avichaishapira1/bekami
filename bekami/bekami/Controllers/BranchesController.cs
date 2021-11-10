@@ -20,7 +20,7 @@ namespace bekami.Controllers
         }
 
         // GET: Branches
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Admin()
         {
             return View(await _context.Branch.ToListAsync());
         }

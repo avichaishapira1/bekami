@@ -31,23 +31,23 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Aboutus">ABOUT US</a>
                         </li>
                     </ul>
+
+                    @using (Html.BeginForm("search", "Products", FormMethod.Get))
+                    {
+                        <input type="text" name="searchString" />
+                        <input type="submit" value="Search" />
+                    }
+                    @{Html.EndForm(); }
                 </div>
                 <div class="float-left">
                     <div class="btn-group">
-
-                        @using (Html.BeginForm("search", "Products", FormMethod.Get))
-                        {
-                            <input type="text" name="searchString" />
-                            <input type="submit" value="Search" />
-                        }
-                        @{Html.EndForm(); }
                         <a href="#" class="dropdown" data-toggle="dropdown" aria-haspopup="true" style="margin: 5px">
                             <img src="~/images and banners/user.png" width="20" height="20" alt="" />
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                             @if (Context.User.Identity.IsAuthenticated)
                             {
-                                <a class="dropdown-item">hello, @Context.User.Identity.Name</a>
+                                <a class="dropdown-item">Hello, @Context.User.Claims.FirstOrDefault(c => c.Type == "Name")?.Value</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="MyAccount">My Account</a>
                                 <a class="nav-link  atext-light" asp-area="" asp-controller="Orders" asp-action="MyOrders">My Orders</a>
@@ -58,30 +58,32 @@
                                     <ul>
                                         @if ((@Context.User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role))?.Value == "Admin")
                                         {
-                                        <li class="nav-item">
-                                            <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="Admin">Accounts</a>
-                                        </li>
-                                                  
-                                                                    
-                                        <li class="nav-item">
+                                            <li class="nav-item">
+                                                <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="Admin">Accounts</a>
+                                            </li>
 
-                                            <a class="nav-link  atext-light" asp-area="" asp-controller="Products" asp-action="Admin">Products</a>
-                                        </li>
-                                        <li class="nav-item">
 
-                                            <a class="nav-link  atext-light" asp-area="" asp-controller="Orders" asp-action="Admin">Orders</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link  atext-light" asp-area="" asp-controller="Stores" asp-action="Admin">Locations</a>
-                                        </li> }
+                                            <li class="nav-item">
+
+                                                <a class="nav-link  atext-light" asp-area="" asp-controller="Products" asp-action="Admin">Products</a>
+                                            </li>
+                                            <li class="nav-item">
+
+                                                <a class="nav-link  atext-light" asp-area="" asp-controller="Orders" asp-action="Admin">Orders</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link  atext-light" asp-area="" asp-controller="Branches" asp-action="Admin">Locations</a>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                                 <li class="nav-item">
-                                    <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="Logout">Hello @Context.User.Claims.FirstOrDefault(c => c.Type == "Name")?.Value</a>
+                                    <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="Logout">log out</a>
                                 </li>
                             }
                             else
                             {
+
                                 <a class="dropdown-item" asp-action="Register" asp-controller="User">Register</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" asp-action="Login" asp-controller="User">log in</a>
@@ -91,12 +93,13 @@
 
                         </div>
                     </div>
+
                     <a href="#" role="button" style="margin: 5px">
-                        <img src="~/images and banners/heart.png" width="20" height="20" alt="" />
+                        <img src="~/images and banners/shopping-cart .png" width="20" height="20" alt="" />
                     </a>
                 </div>
             </div>
-         </nav>
+        </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -107,15 +110,26 @@
     <footer class="footer text-muted">
         <div class="container">
             <br><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a><br />
-            &copy; 2021 - Bekami -
             @* add credit card logos to the footer  *@
-            <br><img src="https://www.merchantequip.com/image/?logos=v|m|a|p&height=32" alt="Merchant Equipment Store Credit Card Logos" />
-        </div>
-
+            <br><img src="https://www.merchantequip.com/image/?logos=v|m|a|p&height=32" alt="Merchant Equipment Store Credit Card Logos" /><br />
+             @*<br >
+                    <p>Your Local Time</p>
+                    <p class="bartificer-worldclock-auto"></p>
+                    <p>The Time in Paris</p>
+                    <p class="bartificer-worldclock-auto" data-timezone="Europe/Paris"></p>
+                    <p>The Time in LA </p>
+                    <p class="bartificer-worldclock-auto" data-timezone="America/Los_Angeles"></p>
+              <br />*@
+                    &copy; 2021 - Bekami -
+</div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js" integrity="sha256-vvT7Ok9u6GbfnBPXnbM6FVDEO8E1kTdgHOFZOAXrktA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.11/moment-timezone-with-data.js" integrity="sha256-7JLe29sXteSPEQGXqKWbFs+ABl9M50OJEEB7ntZth2k=" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/bbusschots/bartificer_worldclock_js/master/lib/bartificer.worldclock.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
