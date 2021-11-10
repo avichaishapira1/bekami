@@ -210,6 +210,23 @@ namespace bekami.Migrations
                 b.Navigation("CartId");
                 b.Navigation("ProductId");
             });
+            
+            modelBuilder.Entity("bekami.Models.OrderProduct", b =>
+            {
+                b.HasOne("bekami.Models.Order", "Order")
+                    .WithOne()
+                    .HasForeignKey("Id")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+                b.HasOne("bekami.Models.Product", "Product")
+                    .WithOne()
+                    .HasForeignKey("ProductId")
+
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+                b.Navigation("Id");
+                b.Navigation("ProductId");
+            });
 #pragma warning restore 612, 618
         }
     }

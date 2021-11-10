@@ -21,7 +21,9 @@ namespace bekami.Models
 
     public class Order
     {
-        [DisplayName("ID")] public int Id { get; set; }
+        [DisplayName("ID")] 
+        [Key]
+        public int Id { get; set; }
 
         [DisplayName("Date")]
         [DataType(DataType.DateTime)]

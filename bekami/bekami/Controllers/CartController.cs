@@ -103,7 +103,7 @@ namespace bekami.Controllers
 
 
 
-            string email = User.Claims.FirstOrDefault(c => c.Type == "AccountEmail").Value;
+            string email = User.Claims.FirstOrDefault(c => c.Type == "userEmail").Value;
             order.UserId = _context.User.FirstOrDefault(i => i.Email == email);
 
             order.Created = DateTime.Now;

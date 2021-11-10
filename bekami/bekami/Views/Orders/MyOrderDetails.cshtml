@@ -75,7 +75,7 @@
                             @foreach (var item in Model)
                             {
 
-                <tr class="@item.Id">
+                <tr class="@item.OrderProductId">
                     <td>
                         <div class="media">
                             <div class="d-flex">
@@ -91,7 +91,7 @@
                     </td>
 
                     <td>
-                        <div class="mdb-select md-form" id="@item.Id">
+                        <div class="mdb-select md-form" id="@item.OrderProductId">
                             @Html.DisplayFor(modelItem => item.Quantity)
                         </div>
 

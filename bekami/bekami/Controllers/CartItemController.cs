@@ -22,7 +22,7 @@ namespace bekami.Controllers
         // GET: CartItems
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CartItem.ToListAsync());
+            return View(await _context.CartItem.Include(i => i.Product).ToListAsync());
         }
 
         // GET: CartItems/Details/5

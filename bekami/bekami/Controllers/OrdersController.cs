@@ -30,11 +30,11 @@ namespace bekami.Controllers
         // show my orders(index for specific account)
         public async Task<IActionResult> MyOrders()
         {
-            if (User.Claims.FirstOrDefault(c => c.Type == "AccountEmail") == null)
+            if (User.Claims.FirstOrDefault(c => c.Type == "userEmail") == null)
                 return RedirectToAction("Login", "User");
 
-            var accountEmail = User.Claims.FirstOrDefault(c => c.Type == "AccountEmail").Value;
-            var user = await _context.User.FirstOrDefaultAsync(m => m.Email == accountEmail);
+            var userEmail = User.Claims.FirstOrDefault(c => c.Type == "userEmail").Value;
+            var user = await _context.User.FirstOrDefaultAsync(m => m.Email == userEmail);
 
             return View(await _context.Order.Where(i => i.UserId == user).ToListAsync());
         }
@@ -42,24 +42,30 @@ namespace bekami.Controllers
         // show my order(order for specific account) get Detail ID!
         public async Task<IActionResult> MyOrderDetails(int? id)
         {
-            if (User.Claims.FirstOrDefault(c => c.Type == "AccountEmail") == null)
+            if (User.Claims.FirstOrDefault(c => c.Type == "userEmail") == null)
                 return RedirectToAction("Login", "User");
 
-            var accountEmail = User.Claims.FirstOrDefault(c => c.Type == "AccountEmail").Value;
-            var user = await _context.User.FirstOrDefaultAsync(m => m.Email == accountEmail);
+            var userEmail = User.Claims.FirstOrDefault(c => c.Type == "userEmail").Value;
+            var user = await _context.User.FirstOrDefaultAsync(m => m.Email == userEmail);
 
 
             if (id == null)
                 return NotFound();
 
 
-            var order = await _context.Order.FirstOrDefaultAsync(m => (m.Id == id) && (m.UserId == user));
+            var order = await _context.Order.Include(o => o.ProductsOrdered).FirstOrDefaultAsync(m => (m.Id == id) && (m.UserId == user));
 
             if (order == null)
                 return NotFound();
 
+            var orderProducts = _context.OrderProduct.Where(i => i.OrderId == order.Id).Include(i => i.Product).ToListAsync();
 
-            return View(await _context.OrderProduct.Where(i => i.Order == order).Include(c => c.Product).ToListAsync());
+            if (orderProducts.Result.Count == 0)
+            {
+                return NotFound();
+            }
+            
+            return View("MyOrderDetails", orderProducts.Result);
 
         }
 

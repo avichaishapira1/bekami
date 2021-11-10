@@ -13,12 +13,14 @@ namespace bekami.Models
     public class OrderProduct
     {
         [DisplayName("ID")]
-        public int Id { get; set; }
+        public int OrderProductId { get; set; }
         
-        public Order Order;
+        public virtual Order Order { get; set; }
 
-        public Product Product;
+        public virtual Product Product { get; set; }
+        public int OrderId { get; set; }
 
+        public int ProductId { get; set; }
         
         [DisplayName("Total")]
         [DataType(DataType.Currency)]
