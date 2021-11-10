@@ -47,7 +47,15 @@ namespace bekami.Models
 
         [DisplayName("Address")] 
         public String Address { get; set; }
+        
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [DisplayName("Phone number")]
+        public string PhoneNumber { get; set; }
 
+        [Required]
+        [DisplayName("Credit card number")]
+        public string CreditCardNum { get; set; }
 
     }
 }

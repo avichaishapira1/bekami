@@ -82,7 +82,7 @@ namespace bekami.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Checkout([Bind("Id,FirstName,LastName,Email,StreetAddress,ZipCode,City,Country,PhoneNumber,CreditCardNum")] Order order)
+        public IActionResult Checkout([Bind("Id,Email,Address,ZipCode,PhoneNumber,CreditCardNum")] Order order)
         {
             //if u try to checkout with 0 items
             var NumOfItems = GetNumOfItems();
@@ -131,7 +131,7 @@ namespace bekami.Controllers
                 }
                 _context.Remove(cart);
                 _context.SaveChanges();
-                return RedirectToAction("MyOrderProducts", "Orders", order);
+                return RedirectToAction("MyProducts", "Orders", order);
             }
             return View(order);
         }

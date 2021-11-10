@@ -40,7 +40,7 @@ namespace bekami.Controllers
         }
 
         // show my order(order for specific account) get Detail ID!
-        public async Task<IActionResult> MyOrderDetails(int? id)
+        public async Task<IActionResult> MyProducts(int? id)
         {
             if (User.Claims.FirstOrDefault(c => c.Type == "userEmail") == null)
                 return RedirectToAction("Login", "User");
@@ -58,14 +58,14 @@ namespace bekami.Controllers
             if (order == null)
                 return NotFound();
 
-            var orderProducts = _context.OrderProduct.Where(i => i.OrderId == order.Id).Include(i => i.Product).ToListAsync();
+            var orderProducts = await _context.OrderProduct.Where(i => i.OrderId == order.Id).Include(i => i.Product).ToListAsync();
 
-            if (orderProducts.Result.Count == 0)
+            if (orderProducts.Count == 0)
             {
                 return NotFound();
             }
             
-            return View("MyOrderDetails", orderProducts.Result);
+            return View(orderProducts);
 
         }
 

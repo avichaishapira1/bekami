@@ -28,52 +28,19 @@
                     <i style="font-size:14px; color: #415094; font-weight: 500;">Shipping Details</i>
 
                     <form id="DetailsForm" class="row contact_form" asp-action="Checkout" method="post">
-                        <div class="col-md-12 form-group">
-                        </div>
-                        @*
-                        <div class="col-md-6 form-group p_star">
-                            <input asp-for="FirstName" class="form-control" placeholder="First name">
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input asp-for="LastName" class="form-control" placeholder="Last name">
-                            <span asp-validation-for="LastName" class="text-danger"></span>
-                        </div>
                         <div class="col-md-6 form-group p_star">
                             <input asp-for="PhoneNumber" class="form-control" placeholder="Phone number">
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 form-group p_star">
-                            <input asp-for="Email" class="form-control" placeholder="Email">
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input asp-for="StreetAddress" class="form-control" placeholder="Adress line">
-                            <span asp-validation-for="StreetAddress" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input asp-for="City" class="form-control" placeholder="Town/City">
-                            <span asp-validation-for="City" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input asp-for="ZipCode" class="form-control" placeholder="Zip code*">
-                            <span asp-validation-for="ZipCode" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                        </div>
-                        <div class="col-md-4 form-group p_star">
-                            <select asp-for="Country" class="country_select">
-                                <option value="Israel">Israel</option>
-                                <option value="USA">Untied States</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
+                            <input asp-for="Address" class="form-control" placeholder="Address line">
+                            <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 form-group p_star">
                             <input asp-for="CreditCardNum" class="form-control" placeholder="Credit Card Number*">
                             <span asp-validation-for="CreditCardNum" class="text-danger"></span>
                         </div>
-                        *@
+                        
 
                         <!--================Terms&Conditions=================-->
                         <div class="col-md-12 form-group">
@@ -147,17 +114,6 @@
         </div>
     </div>
 </section>
-<!--================End Checkout Area =================-->
-<!--================End Checkout Area =================-->
-<div id="dialog-message" title="Nice Try">
-    <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
-        It appears you're trying to checkout after your cart has been modified...
-    </p>
-    <p>
-        <b>Lets view your cart once more and try again</b>.
-    </p>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");

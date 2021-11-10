@@ -35,6 +35,7 @@ namespace bekami.Controllers
 
             var cartItem = await _context.CartItem
                 .FirstOrDefaultAsync(m => m.ItemId == id);
+            ViewBag.Total = cartItem.UnitPrice;
             if (cartItem == null)
             {
                 return NotFound();
