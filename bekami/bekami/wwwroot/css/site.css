@@ -4,27 +4,42 @@ for details on configuring this project to bundle and minify static web assets. 
 
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    text-align: center;
+    word-break: break-all;
+    border-bottom: 10px hidden;
+    margin-bottom: 5px;
+    
 }
+
 .content {
     max-width: 800px;
     margin: auto;
 }
-.btn {
+
+
+.btn{
     color: #fff;
-    background-color: #000;
-    border-color: #fff;
+    background-color: rgb(200,173,126);
     opacity: 0.7;
-}
+    font-style: italic;
+    justify-content: center;
+    border-block-color: none;
+    
+   }
+
 
 .card btn:hover {
     opacity: 0.7;
 }
 
+li ::file-selector-button{
+    color:rosybrown;
+    
+}
+
 h1, h2, h3, h4, h5, h6 {
-    font-family: Arial
+    font-family:fantasy;
+    color: lightpink;
 }
 
 #map {
@@ -37,10 +52,12 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 22px;
 }
 
+
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-width:10px;
+    border-color: #d2c0a8;
     max-width: 300px;
-    margin: auto;
+    margin: 5px;
     text-align: center;
     font-family: arial;
 }
@@ -52,13 +69,15 @@ h1, h2, h3, h4, h5, h6 {
 
 
 body {
-    font-family: Arial
+    font-family: Arial;
+    
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
+    color: rgb(200,173,126);
     background-color: #f4c5fc;
     border-color: #ebc7ed;
+   
 }
 
 /* Sticky footer styles
@@ -89,12 +108,14 @@ button.accept-policy {
   line-height: inherit;
 }
 
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
   position: relative;
   min-height: 100%;
 }
+
 
 body {
   /* Margin bottom by footer height */
@@ -109,7 +130,11 @@ body {
 }
 /*Search css design*/
 
-
+.control-label {
+    
+    color: rgb(200,173,126);
+    
+}
 /*home page design*/
 
 .column {
