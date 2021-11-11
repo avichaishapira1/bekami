@@ -130,7 +130,7 @@ namespace bekami.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
-                        .HasColumnType("float");
+                        .HasColumnType("decimal");
 
                     b.Property<int>("Size")
                         .HasColumnType("int");
@@ -183,6 +183,50 @@ namespace bekami.Migrations
 
                     b.Navigation("Color");
                 });
+            
+            modelBuilder.Entity("bekami.Models.Cart", b =>
+            {
+                b.HasMany("bekami.Models.CartItem", "Items")
+                    .WithOne()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+                b.Navigation("Items");
+            });
+            
+            
+            modelBuilder.Entity("bekami.Models.CartItem", b =>
+            {
+                b.HasOne("bekami.Models.Cart", "Cart")
+                    .WithOne()
+                    .HasForeignKey("CardId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+                b.HasOne("bekami.Models.Product", "Product")
+                    .WithOne()
+                    .HasForeignKey("ProductId")
+
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+                b.Navigation("CartId");
+                b.Navigation("ProductId");
+            });
+            
+            modelBuilder.Entity("bekami.Models.OrderProduct", b =>
+            {
+                b.HasOne("bekami.Models.Order", "Order")
+                    .WithOne()
+                    .HasForeignKey("Id")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+                b.HasOne("bekami.Models.Product", "Product")
+                    .WithOne()
+                    .HasForeignKey("ProductId")
+
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+                b.Navigation("Id");
+                b.Navigation("ProductId");
+            });
 #pragma warning restore 612, 618
         }
     }

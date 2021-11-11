@@ -28,7 +28,7 @@
                     @Html.DisplayNameFor(model => model.Status)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.AssociatedUser)
+                    @Html.DisplayNameFor(model => model.UserId)
                 </th>
                 <th>
                 </th>
@@ -54,10 +54,10 @@
         @Html.DisplayFor(modelItem => item.Status)
     </td>
     <td>
-        <a href="/Accounts/Details/@Html.DisplayFor(modelItem => item.AssociatedUser.Email)">@Html.DisplayFor(modelItem => item.AssociatedUser.Email)</a>
+        <a href="/Accounts/Details/@Html.DisplayFor(modelItem => item.UserId.Email)">@Html.DisplayFor(modelItem => item.UserId.Email)</a>
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.AssociatedUser.Email)
+        @Html.DisplayFor(modelItem => item.UserId.Email)
     </td>
 
     <td>

@@ -49,8 +49,11 @@
                             {
                                 <a class="dropdown-item">Hello, @Context.User.Claims.FirstOrDefault(c => c.Type == "Name")?.Value</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">my orders</a>
-                                <a class="dropdown-item" href="#">my account</a>
+                                <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="MyAccount">My Account</a>
+                                <a class="nav-link  atext-light" asp-area="" asp-controller="Orders" asp-action="MyOrders">My Orders</a>
+
+                                <a class="nav-link  atext-light" asp-area="" asp-controller="Cart" asp-action="Index">My Cart</a>
+
                                 <div class="header-info-right">
                                     <ul>
                                         @if ((@Context.User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role))?.Value == "Admin")
@@ -85,6 +88,8 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" asp-action="Login" asp-controller="User">log in</a>
                             }
+                            <a asp-controller="Cart" asp-action="Index"><img src="~/images and banners/heart.png" width="20" height="20" alt="" />
+</a>
 
                         </div>
                     </div>
