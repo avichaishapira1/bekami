@@ -18,9 +18,10 @@
                     </div>
                 </div>
                 <!--=End Image Area =-->
-                <!--================Description Area =================-->
-                <div class="col-md-6 order_box">
-                    <p>
+                <!--=Description Area =-->
+                <div class="col-md-6">
+                    <div class="order_box">
+                        <p>
                             <h1>@Model.Name</h1>
                             <hr />
                             @Model.Description <br />
@@ -32,13 +33,11 @@
                             <h6>Price: @Html.DisplayFor(Model => Model.Price) ₪</h6>
                         </p>
 
-                    <br><br />
-
-                        <!--================Buttons Area =================-->
-                        <div class="order_box add_to_cart">
-                            <div class=" btn btn-lg" >
-                            <a id="addToCart" style="cursor:pointer">Add To Cart</a>
-                          </div>
+                        <!--=Buttons Area =-->
+                        <div class="card_area">
+                            <div class="add_to_cart">
+                                <a class="btn_3" asp-area="" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@Model.ProductId">Add To Cart</a>
+                            </div>
                         </div>
                 </div>
             </div>
