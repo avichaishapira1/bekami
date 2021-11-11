@@ -5,9 +5,9 @@
 
 <div class="container">
     <h4>Users</h4>
-    <form asp-action="Filter" id="filterform">
+    <form asp-action="Filter" asp-area="Admin" id="filterform">
         <div class="form-box f-right">
-            <input id="filter" name="term" autocomplete="off" class="form-control" placeholder="search names..." />
+            <input id="filter" name="term" autocomplete="on" class="form-control" placeholder="search names..." />
         </div>
     </form>
     <table class="table">

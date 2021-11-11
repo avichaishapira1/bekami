@@ -7,29 +7,36 @@
 
 <!--=Create a sort navbar =-->
 <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <select id="Size" class="select" asp-items="@Html.GetEnumSelectList(typeof(Size))">
-            <option value="null" disabled selected>Size</option>
+    <div class="navbar">
+       
+      
+                
+        <select id="Size" class="btn " asp-items="@ViewBag.Size">
+            <option value="null" hidden>Size</option>
+            <option value="@Size.S">Small</option>
+            <option value="@Size.M">Medium</option>
+            <option value="@Size.L">Large</option>
+            <option value="@Size.XL">X.Large</option>
+        </select>
+       
+        
+        <select id="Gender" class="btn " asp-items="@ViewBag.Gender">
+            <option value="null" hidden>Gender</option>
+            <option value="@Gender.man">Man</option>
+            <option value="@Gender.woman">Woman</option>
         </select>
 
-        <select id="Gender" class="select" asp-items="@Html.GetEnumSelectList(typeof(Gender))">
-            <option value="null" disabled selected>Gender</option>
-            <option value="2">All</option>
-        </select>
-
-        <select id="Color" class="select" asp-items="@ViewBag.ColorId">
-            <option value="null" disabled selected>select color</option>
-            <option value="0">All</option>
-        </select>
-
-        <select id="Category" class="select" asp-items="@ViewBag.CategoryId">
-            <option value="null" disabled selected>select category</option>
-            <option value="0">All</option>
+        <select id="Color" class="btn" asp-items="@ViewBag.ColorId">
+            <option value="null" hidden>Select color</option>
         </select>
     </div>
-    <div class="select-this d-flex">
-        <select id="Sort" class="select">
-            <option value="null" disabled selected>Sort</option>
+
+    
+    <div class="navbar-nav " style="padding: 7px 10px 50px 10px;" >
+
+        <select id="Sort" class="btn custom-select-lg">
+
+            <option value="null" hidden>Sort</option>
             <option value="alphabetical">Alphabetical</option>
             <option value="low2high">Price low to high</option>
             <option value="high2low">Price high to low</option>
@@ -37,28 +44,33 @@
     </div>
 </nav>
 
+
 <section>
     <div class=" row row-cols-1 row-cols-md-2">
-        <div class="card-deck">
+        <div class="card-deck carousel-control">
 
             @foreach (var item in Model)
             {
-                <div class="card" style="width: 18rem;">
-                    <img src=@item.Imagepath class="card-img-top">
-                    <div class="card-body">
-                        <a asp-action="ProductPage" asp-route-id="@item.ProductId">
-                            <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
-                        </a>
-                        <p class="card-text">
-                            @Html.DisplayFor(modelItem => item.Size)
-                            @Html.DisplayFor(modelItem => item.Color.Name)
-                        </p>
-                        <p class="card-text price">
-                            price: @Html.DisplayFor(modelItem => item.Price) ₪
-                        </p>
-                    </div>
-                    <a>Buy now</a>
+            <div class="card" style="width: 15rem;">
+                <img src=@item.Imagepath class="card-img-top">
+                <div class="card-body">
+                    <a class="btn btn-light"  style="color:lightpink; background-color:white" asp-action="ProductPage" asp-route-id="@item.ProductId">
+                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
+                    </a>
+                    <p class="card-text">
+                        @Html.DisplayFor(modelItem => item.Description)
+                        @Html.DisplayFor(modelItem => item.Tags)
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </p>
+
                 </div>
+                <div class="card-text price">
+                    price: @Html.DisplayFor(modelItem => item.Price) ₪
+                </div>
+                <a asp-> 
+                <h3 class="btn btn-light" style="color:lightpink; background-color:white" >Buy now</h3>
+                </a>
+            </div>
             }
         </div>
     </div>
