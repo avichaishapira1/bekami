@@ -1,6 +1,59 @@
-﻿@{
+﻿@model List<bekami.Models.Branch>
+
+@{
     ViewData["Title"] = "Stores";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Hi</p>
+
+<h1>Our stores</h1>
+@* Show Bing map *@
+<body onload='loadMapScenario();'>
+    <div id='printoutPanel'></div>
+    <div id='myMap' style='width: 90vw; height: 50vh;'></div>
+</body>
+
+@* create stores cards their info *@
+
+<div class=" row row-cols-1 row-cols-md-2 justify-content-md-center">
+    <div class="card-deck">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="card" style="width: 18rem;">
+               
+                <b> <img src="~/images and banners/placeholder.png" width="20" height="20" /> Address: </b>@Model[i].City
+                <b><img src="~/images and banners/open.png" width="20" height="20" />Openning time:</b>@Model[i].Openingtime
+                <b><img src="~/images and banners/mobile-phone.png" width="20" height="20" />Phone number:</b>@Model[i].Phonenumber
+                <hr>
+                <a></a>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AkrNoAP97DpFeKj9ZCyLysCoLsto9IDgDTdKwPdRnD40oJElEspuxLY9fF2gLcfH'></script>
+    @section scripts{
+        <script>
+
+                //creates a pushpin on the map
+    function loadMapScenario()
+    {
+        var pushpin;
+        var map;
+        var _branchdata =@Html.Raw(Json.Serialize(Model.Select(b => new {latitude = b.LocationLatitude, longitude=b.LocationLongitude }))); //create a json with the location of the shops
+        map = new Microsoft.Maps.Map(document.getElementById('myMap'));
+        pushpin = [];
+        for (var i = 0; i < _branchdata.length; i++) {
+            var loc = new Microsoft.Maps.Location(_branchdata[i].latitude, _branchdata[i].longitude);
+            pushpin[i] = new Microsoft.Maps.Pushpin(loc, {
+                icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+            });//creates a customized pushpin
+            map.entities.push(pushpin[i]);
+        }
+    }
+
+        </script>
+    }

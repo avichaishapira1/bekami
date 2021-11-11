@@ -140,8 +140,8 @@ namespace bekami.Controllers
             var user = await _context.User.FindAsync(id);
 
             //delete his reviews & orders
-            _context.OrderProduct.RemoveRange(_context.OrderProduct.Where(p => p.Order.AssociatedUser == user));
-            _context.Order.RemoveRange(_context.Order.Where(p => p.AssociatedUser == user));
+            _context.OrderProduct.RemoveRange(_context.OrderProduct.Where(p => p.Order.User == user));
+            _context.Order.RemoveRange(_context.Order.Where(p => p.User == user));
 
             _context.User.Remove(user);
             await _context.SaveChangesAsync();
@@ -341,10 +341,10 @@ namespace bekami.Controllers
 
         public async Task<IActionResult> EditMyAccount()
         {
-            if (User.Claims.FirstOrDefault(c => c.Type == "UserEmail") == null) //not logged in
+            if (User.Claims.FirstOrDefault(c => c.Type == "userEmail") == null) //not logged in
                 return RedirectToAction("Login");
 
-            var email = User.Claims.FirstOrDefault(c => c.Type == "UserEmail").Value;
+            var email = User.Claims.FirstOrDefault(c => c.Type == "userEmail").Value;
             var user = await _context.User.FirstOrDefaultAsync(m => m.Email == email);
 
             return View(user);
@@ -354,11 +354,11 @@ namespace bekami.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditMyAccount(string Email, [Bind("Id,Username,FirstName,LastName,Email,Password,ConfirmPassword,CreditCardNum,RegistrationDate")] User user)
         {
-            if (User.Claims.FirstOrDefault(c => c.Type == "UserEmail") == null) //not logged in
+            if (User.Claims.FirstOrDefault(c => c.Type == "userEmail") == null) //not logged in
                 return RedirectToAction("Login");
 
             //Details taken from Claims compared to the one with the post request to auth
-            var email = User.Claims.FirstOrDefault(c => c.Type == "UserEmail").Value;
+            var email = User.Claims.FirstOrDefault(c => c.Type == "userEmail").Value;
             if (Email != email)
             {
                 return RedirectToAction("Login");

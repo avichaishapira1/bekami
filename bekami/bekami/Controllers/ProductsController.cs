@@ -186,7 +186,7 @@ namespace bekami.Controllers
         {
             return _context.Product.Any(e => e.ProductId == id);
         }
-        
+
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Admin()
         {

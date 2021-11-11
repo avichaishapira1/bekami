@@ -8,10 +8,10 @@
         <hr />
         <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.First().Order.AssociatedUser)
+                @Html.DisplayNameFor(model => model.First().Order.User)
             </dt>
             <dd class="col-sm-10">
-                <a href="/Accounts/Details/@Html.DisplayFor(model => model.First().Order.AssociatedUser)">  @Html.DisplayFor(model => model.First().Order.AssociatedUser)</a>
+                <a href="/Accounts/Details/@Html.DisplayFor(model => model.First().Order.User)">  @Html.DisplayFor(model => model.First().Order.User)</a>
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.First().Order.Created)
@@ -26,22 +26,22 @@
                 @Html.DisplayFor(model => model.First().Order.Status)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.First().Order.AssociatedUser.FirstName)
+                @Html.DisplayNameFor(model => model.First().Order.User.FirstName)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.First().Order.AssociatedUser.FirstName)
+                @Html.DisplayFor(model => model.First().Order.User.FirstName)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.First().Order.AssociatedUser.LastName)
+                @Html.DisplayNameFor(model => model.First().Order.User.LastName)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.First().Order.AssociatedUser.LastName)
+                @Html.DisplayFor(model => model.First().Order.User.LastName)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.First().Order.AssociatedUser.Email)
+                @Html.DisplayNameFor(model => model.First().Order.User.Email)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.First().Order.AssociatedUser.Email)
+                @Html.DisplayFor(model => model.First().Order.User.Email)
             </dd>
         </dl>
     </div>
@@ -70,7 +70,7 @@
                             @foreach (var item in Model)
                             {
 
-                <tr class="@item.Id">
+                <tr class="@item.OrderProductId">
                     <td>
                         <div class="media">
                             <div class="d-flex">
@@ -86,7 +86,7 @@
                     </td>
 
                     <td>
-                        <div class="mdb-select md-form" id="@item.Id">
+                        <div class="mdb-select md-form" id="@item.OrderProductId">
                             @Html.DisplayFor(modelItem => item.Quantity)
                         </div>
 

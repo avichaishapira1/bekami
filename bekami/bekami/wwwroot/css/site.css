@@ -19,7 +19,8 @@ a.navbar-brand {
 
 .btn{
     color: #fff;
-    background-color: rgb(200,173,126);
+    background-color: #000;
+    border-color: #fff;
     opacity: 0.7;
     font-style: italic;
     justify-content: center;
@@ -74,10 +75,9 @@ body {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: rgb(200,173,126);
+    color: #fff;
     background-color: #f4c5fc;
     border-color: #ebc7ed;
-   
 }
 
 /* Sticky footer styles
@@ -108,14 +108,12 @@ button.accept-policy {
   line-height: inherit;
 }
 
-
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
   position: relative;
   min-height: 100%;
 }
-
 
 body {
   /* Margin bottom by footer height */
@@ -154,4 +152,9 @@ body {
 hr {
     clear: both;
     visibility: hidden;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
 }

@@ -1,0 +1,54 @@
+﻿@model bekami.Models.Branch
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Branch</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="LocationId" />
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationLongitude" class="control-label"></label>
+                <input asp-for="LocationLongitude" class="form-control" />
+                <span asp-validation-for="LocationLongitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationLatitude" class="control-label"></label>
+                <input asp-for="LocationLatitude" class="form-control" />
+                <span asp-validation-for="LocationLatitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Openingtime" class="control-label"></label>
+                <textarea asp-for="Openingtime" class="form-control"></textarea>
+                <span asp-validation-for="Openingtime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phonenumber" class="control-label"></label>
+                <input asp-for="Phonenumber" class="form-control" />
+                <span asp-validation-for="Phonenumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
