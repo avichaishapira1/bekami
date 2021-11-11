@@ -31,7 +31,7 @@ namespace bekami.Models
         [Required]
         public Gender Gender { get; set; }
         [Required]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         [Display(Name = "Is available")]
         public bool IsAvailable { get; set; }
         [Display(Name = "Image")]
