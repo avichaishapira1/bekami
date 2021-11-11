@@ -46,10 +46,10 @@
             <td>
                 <div class="media">
                     <div class="d-flex">
-                        <a asp-action="Details" asp-controller="Products" asp-route-id="@item.ProductId"> <img src="@Html.DisplayFor(modelItem => item.Imagepath)" alt="" width="100" height="100">  </a>
+                        <a asp-action="Productpage" asp-controller="Products" asp-route-id="@item.ProductId"> <img src="@Html.DisplayFor(modelItem => item.Imagepath)" alt="" width="100" height="100">  </a>
                     </div>
                     <div class="media-body">
-                        <a asp-action="Details" asp-controller="Products" asp-route-id="@item.ProductId"> <p>@Html.DisplayFor(modelItem => item.Name) <br /> @Html.DisplayFor(modelItem => item.Description)</p>  </a>
+                        <a asp-action="Productpage" asp-controller="Products" asp-route-id="@item.ProductId"> <p>@Html.DisplayFor(modelItem => item.Name) <br /> @Html.DisplayFor(modelItem => item.Description)</p>  </a>
                     </div>
                 </div>
             </td>
@@ -69,9 +69,7 @@
             </td>
             <td>
                 <a class="black-color" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
-                <a class="black-color" asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
                 <a class="black-color" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a> |
-                <a class="tweet" id="@item.ProductId" href="#"><i class="fab fa-twitter"></i></a>
             </td>
         </tr>}
                     <!--================Items Area END =================-->
@@ -124,7 +122,6 @@
                 <a class="black-color" href="/Products/Edit/${id}">Edit</a>|
                 <a class="black-color" href="/Products/Details/${id}">Details</a>|
                 <a class="black-color" href="/Products/Delete/${id}">Delete</a>|
-                <a class="tweet" id="${id}" href="#"><i class="fab fa-twitter"></i></a>
             </td>
         </tr>
     </script>

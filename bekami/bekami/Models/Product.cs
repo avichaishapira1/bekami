@@ -48,8 +48,6 @@ namespace bekami.Models
         public Color Color { get; set; }
 
 
-        public IEnumerable<Tags> Tags { get; set; }
-
         [Required]
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
