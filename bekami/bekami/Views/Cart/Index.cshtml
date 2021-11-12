@@ -58,10 +58,10 @@
                                                                     <td>
                                                                         <div class="media">
                                                                             <div class="d-flex">
-                                                                                <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Product.ProductId"> <img src="@Html.DisplayFor(modelItem => item.Product.Imagepath)" alt="">  </a>
+                                                                                <a asp-action="Productpage" asp-controller="Products" asp-route-id="@item.Product.ProductId"> <img src="@Html.DisplayFor(modelItem => item.Product.Imagepath)" alt="">  </a>
                                                                             </div>
                                                                             <div class="media-body">
-                                                                                <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Product.ProductId"> <p>@Html.DisplayFor(modelItem => item.Product.Name)</p>  </a>
+                                                                                <a asp-action="Productpage" asp-controller="Products" asp-route-id="@item.Product.ProductId"> <p>@Html.DisplayFor(modelItem => item.Product.Name)</p>  </a>
                                                                             </div>
                                                                         </div>
                                                                     </td>

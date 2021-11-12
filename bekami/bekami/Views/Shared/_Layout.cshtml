@@ -21,10 +21,7 @@
                     @* menu *@
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="products" asp-controller="products" asp-action="women">WOMEN</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="products" asp-controller="products" asp-action="men">MEN</a>
+                            <a class="nav-link"  asp-controller="products" asp-action="Shop">SHOP</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Stores">STORES</a>
@@ -79,12 +76,15 @@
                                             <li class="nav-item">
                                                 <a class="nav-link  atext-light" asp-area="" asp-controller="Stores" asp-action="Admin">Locations</a>
                                             </li>
+                                         <li class="nav-item">
+                                                <a class="nav-link  btn" asp-area="" asp-controller="User" asp-action="Logout">log out</a>
+                                           </li>
                                         }
                                     </ul>
                                 </div>
-
-                                <a class="nav-link  btn" style="color:dimgray; border-color:Background" asp-area="" asp-controller="User" asp-action="Logout">Log-Out</a>
-
+                                <li class="nav-item">
+                                    <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="Logout">log out</a>
+                                </li>
                             }
                             else
                             {
@@ -92,19 +92,12 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" asp-action="Login" asp-controller="User">log in</a>
                             }
-                            <a asp-controller="Cart" asp-action="Index">
-                                <img src="~/images and banners/heart.png" width="20" height="20" alt="" />
-                            </a>
-
                         </div>
                     </div>
-                    <a href="#" role="button" style="margin: 5px">
-                        <img src="~/images and banners/heart.png" width="20" height="20" alt="" />
-                    </a>
-                    <a href="#" role="button" style="margin: 5px">
-                        <img src="~/images and banners/shopping-cart .png" width="20" height="20" alt="" />
-                    </a>
                 </div>
+                <a asp-controller="Cart" asp-action="Index">
+                    <img src="~/images and banners/shopping-cart .png" width="20" height="20" alt="" />
+                </a>
             </div>
         </nav>
     </header>
@@ -120,9 +113,9 @@
             <br><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a><br />
             &copy; 2021 - Bekami -
             @* add credit card logos to the footer  *@
-            <br><img src="https://www.merchantequip.com/image/?logos=v|m|a|p&height=32" alt="Merchant Equipment Store Credit Card Logos" />
+            <br><img src="https://www.merchantequip.com/image/?logos=v|m|a|p&height=32" alt="Merchant Equipment Store Credit Card Logos" /><br />
+            &copy; 2021 - Bekami -
         </div>
-
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
