@@ -11,6 +11,7 @@ a.navbar-brand {
     
 }
 
+
 .content {
     max-width: 800px;
     margin: auto;
@@ -74,9 +75,11 @@ body {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: rgb(200,173,126);
+    
     background-color: #f4c5fc;
     border-color: #ebc7ed;
+    lighting-color: brown;
+    color:rosybrown;
 }
 
 /* Sticky footer styles
@@ -134,7 +137,18 @@ body {
     
 }
 /*home page design*/
+.nav-link:any-link
+{
+    color:lightpink;
+    opacity:1;
+    
+}
+.nav-item::marker{
 
+    color:saddlebrown;
+ 
+
+}
 .column {
     float: left;
     width: 50%;
@@ -153,7 +167,10 @@ hr {
     visibility: hidden;
 }
 
+
 .dropdown {
     position: relative;
     display: inline-block;
+    
 }
+

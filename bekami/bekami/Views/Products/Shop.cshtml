@@ -7,19 +7,25 @@
 
 <!--=Create a sort navbar =-->
 <nav>
-    <div class="navbar">
-       
+   
+    <div class="navbar" >
+
+
+
+     
+            <select id="Size" class="btn " aria-labelledby="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" asp-items="@ViewBag.Size">
+
+                <option value="null" hidden>Size</option>
+                <option value="@Size.S">Small</option>
+                <option value="@Size.M">Medium</option>
+                <option value="@Size.L">Large</option>
+                <option value="@Size.XL">X.Large</option>
+
+            </select>
       
-                
-        <select id="Size" class="btn " asp-items="@ViewBag.Size">
-            <option value="null" hidden>Size</option>
-            <option value="@Size.S">Small</option>
-            <option value="@Size.M">Medium</option>
-            <option value="@Size.L">Large</option>
-            <option value="@Size.XL">X.Large</option>
-        </select>
-       
-        
+     
+
+
         <select id="Gender" class="btn " asp-items="@ViewBag.Gender">
             <option value="null" hidden>Gender</option>
             <option value="@Gender.man">Man</option>

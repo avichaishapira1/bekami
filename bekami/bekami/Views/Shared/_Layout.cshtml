@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Bekami</title>
@@ -9,7 +10,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar  navbar-expand-lg navbar-light bg-light">
+       
+        <nav class="navbar  navbar-expand-lg navbar-light" style="background-color: #b89a71  ;font-family: Sofia; font-size: 18px">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/images and banners/logo.png" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,39 +46,44 @@
                         <a href="#" class="dropdown" data-toggle="dropdown" aria-haspopup="true" style="margin: 5px">
                             <img src="~/images and banners/user.png" width="20" height="20" alt="" />
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <div class="dropdown-menu " aria-labelledby="navbarScrollingDropdown">
                             @if (Context.User.Identity.IsAuthenticated)
                             {
-                                <a class="dropdown-item">Hello, @Context.User.Claims.FirstOrDefault(c => c.Type == "Name")?.Value</a>
+                                <a class="dropdown-item-text text-center">Hello, @Context.User.Claims.FirstOrDefault(c => c.Type == "Name")?.Value </a>
+
                                 <div class="dropdown-divider"></div>
-                                <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="MyAccount">My Account</a>
-                                <a class="nav-link  atext-light" asp-area="" asp-controller="Orders" asp-action="MyOrders">My Orders</a>
 
-                                <a class="nav-link  atext-light" asp-area="" asp-controller="Cart" asp-action="Index">My Cart</a>
+                                <div class="dropdown-item-text text-center">
+                                    <a class="nav-link " asp-area="" asp-controller="User" asp-action="MyAccount">My Account</a>
+                                    <a class="nav-link " asp-area="" asp-controller="Orders" asp-action="MyOrders">My Orders</a>
 
+                                    <a class="nav-link  atext-light" asp-area="" asp-controller="Cart" asp-action="Index">My Cart</a>
+                                </div>
+                                <div class="dropdown-divider"></div>
                                 <div class="header-info-right">
                                     <ul>
                                         @if ((@Context.User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role))?.Value == "Admin")
                                         {
                                             <li class="nav-item">
-                                                <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="Admin" style="color:rosybrown">Account</a>
+                                                <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="Admin">Account</a>
                                             </li>
 
                                             <li class="nav-item">
 
-                                            <a class="nav-link  atext-light" asp-area="" asp-controller="Products" asp-action="Admin">Products</a>
-                                        </li>
-                                        <li class="nav-item">
+                                                <a class="nav-link  atext-light" asp-area="" asp-controller="Products" asp-action="Admin">Products</a>
+                                            </li>
+                                            <li class="nav-item">
 
-                                            <a class="nav-link  atext-light" asp-area="" asp-controller="Orders" asp-action="Admin">Orders</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link  atext-light" asp-area="" asp-controller="Stores" asp-action="Admin">Locations</a>
-                                        </li> }
+                                                <a class="nav-link  atext-light" asp-area="" asp-controller="Orders" asp-action="Admin">Orders</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link  atext-light" asp-area="" asp-controller="Stores" asp-action="Admin">Locations</a>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
 
-                                <a class="nav-link  atext-light btn btn-danger" style="color:dimgray; border-color:Background" asp-area="" asp-controller="User" asp-action="Logout">Log-Out</a>
+                                <a class="nav-link  btn" style="color:dimgray; border-color:Background" asp-area="" asp-controller="User" asp-action="Logout">Log-Out</a>
 
                             }
                             else
@@ -85,8 +92,9 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" asp-action="Login" asp-controller="User">log in</a>
                             }
-                            <a asp-controller="Cart" asp-action="Index"><img src="~/images and banners/heart.png" width="20" height="20" alt="" />
-</a>
+                            <a asp-controller="Cart" asp-action="Index">
+                                <img src="~/images and banners/heart.png" width="20" height="20" alt="" />
+                            </a>
 
                         </div>
                     </div>
