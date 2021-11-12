@@ -18,4 +18,10 @@
     <Content Remove="wwwroot\js\OrderProduct.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\images and banners\WhatsApp Image 2021-11-07 at 20.15.17 (1).jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

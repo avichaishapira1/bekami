@@ -55,31 +55,34 @@
     <div class=" row row-cols-1 row-cols-md-2">
         <div class="card-deck">
 
-            
-                @foreach (var item in Model)
-                {
-                    <div class="card" style="width: 16rem;">
-                        <img src=@item.Imagepath class="card-img-top">
-                        <div class="card-body">
-                            <a class="btn btn-light" style="color:lightpink; background-color:white" asp-action="ProductPage" asp-route-id="@item.ProductId">
-                                <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
-                            </a>
-                            <p class="card-text">
-                                @Html.DisplayFor(modelItem=> item.Description)
-                                @Html.DisplayFor(modelItem => item.Tags)
-                                @Html.DisplayFor(modelItem => item.Category)
-                            </p>
 
-                        </div>
-                        <div class="card-text price">
-                            price: @Html.DisplayFor(modelItem => item.Price) ₪
-                        </div>
-                        <a asp->
-                            <h3 class="btn btn-light" style="color:lightpink; background-color:white">Buy now</h3>
-                        </a>
-                    </div>
-                }
+            
+                  
+
+               
+             
+
+            @foreach (var item in Model)
+            {
+            <div class="card" style="width: 18rem;">
+                <img src=@item.Imagepath class="card-img-top">
+                <div class="card-body">
+                    <a class="btn btn-light" style="color:lightpink; background-color:white" asp-action="ProductPage" asp-route-id="@item.ProductId">>
+                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
+                    </a>
+                    <p class="card-text">
+                        @Html.DisplayFor(modelItem => item.Size)
+                        @Html.DisplayFor(modelItem => item.Color.Name)
+                    </p>
+                    <p class="card-text price">
+                        price: @Html.DisplayFor(modelItem => item.Price) ₪
+                    </p>
+                </div>
+                <a class="btn btn-light" style="color:lightpink; background-color:white">Buy now</a>
+                   
             </div>
+            }
+        </div>
        
-    </div>
+   </div>
 </section>
