@@ -1,65 +1,89 @@
 ﻿@model IEnumerable<bekami.Models.Product>
-@using bekami.Models
 
 @{
     ViewData["Title"] = "Shop";
 }
 
-<!--=Create a sort navbar =-->
-<nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <select id="Size" class="select" asp-items="@Html.GetEnumSelectList(typeof(Size))">
-            <option value="null" disabled selected>Size</option>
-        </select>
-
-        <select id="Gender" class="select" asp-items="@Html.GetEnumSelectList(typeof(Gender))">
-            <option value="null" disabled selected>Gender</option>
-            <option value="2">All</option>
-        </select>
-
-        <select id="Color" class="select" asp-items="@ViewBag.ColorId">
-            <option value="null" disabled selected>select color</option>
-            <option value="0">All</option>
-        </select>
-
-        <select id="Category" class="select" asp-items="@ViewBag.CategoryId">
-            <option value="null" disabled selected>select category</option>
-            <option value="0">All</option>
-        </select>
-    </div>
-    <div class="select-this d-flex">
-        <select id="Sort" class="select">
-            <option value="null" disabled selected>Sort</option>
-            <option value="alphabetical">Alphabetical</option>
-            <option value="low2high">Price low to high</option>
-            <option value="high2low">Price high to low</option>
-        </select>
-    </div>
-</nav>
 
 <section>
-    <div class=" row row-cols-1 row-cols-md-2">
-        <div class="card-deck">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-            @foreach (var item in Model)
-            {
-                <div class="card" style="width: 18rem;">
-                    <img src=@item.Imagepath class="card-img-top">
-                    <div class="card-body">
-                        <a asp-action="ProductPage" asp-route-id="@item.ProductId">
-                            <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
-                        </a>
-                        <p class="card-text">
-                            @Html.DisplayFor(modelItem => item.Size)
-                            @Html.DisplayFor(modelItem => item.Color.Name)
-                        </p>
-                        <p class="card-text price">
-                            price: @Html.DisplayFor(modelItem => item.Price) ₪
-                        </p>
-                    </div>
-                    <a>Buy now</a>
-                </div>
-            }
+            @*<select id="Gender" class="select" asp-items="@Html.GetEnumSelectList(typeof(Gender))">
+                <option value="2">All</option>
+            </select>
+
+            <select id="Size" class="select" asp-items="@Html.GetEnumSelectList(typeof(Size))">
+                <option value="0" disabled selected>All</option>
+            </select>*@
+
+            <select id="Color" class="select" asp-items="@ViewBag.ColorId">
+                <option value="0">All</option>
+            </select>
+
+            <select id="Category" class="select" asp-items="@ViewBag.CategoryId">
+                <option value="0">All</option>
+            </select>
+        </div>
+        <div class="select-this d-flex">
+            <select id="Sort" class="select">
+                <option value="null" disabled selected>Sort</option>
+                <option value="newest">Newest</option>
+                <option value="alphabetical">Alphabetical</option>
+                <option value="low2high">Price low to high</option>
+                <option value="high2low">Price high to low</option>
+            </select>
+        </div>
+    </nav>
+
+
+
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="row" id="productInsert">
+
+                <!-- JS Insert Products HERE! -->
+
+            </div>
         </div>
     </div>
+    <div class="form-group" style="text-align: center;" id="showMoreButton">
+        <button id="ShowMoreProducts" class="button button-contactForm btn_1 boxed-btn">Show More Products</button>
+    </div>
 </section>
+
+@section Scripts
+ {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script src="~/js/ProductJs.js"></script>
+     
+
+    <!--================HERE THE JS Products RESULT THAT WILL INSERT IN <div class="comment-list">!=================-->
+    <script id="resultsProdcuts" type="text/html">
+        <div class="col-xl-4 col-lg-4 col-md-6">
+            <div class="mb-60">
+                <div >
+                    <a href="/Products/Productpage/${productId}">
+                        <img src="${imagepath}" width="370" height="403" alt="">
+                    </a>
+                </div>
+
+                <div class="product-caption">
+                    <h4><a href="/Products/Productpage/${productId}">${name}</a></h4>
+                    <div class="price">
+                        <ul>
+                            <li>₪${price}</li>
+                            <li>Size: ${size}</li>
+                            <li><a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="${productId}">Add to cart</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+}
