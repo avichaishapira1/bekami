@@ -61,7 +61,10 @@
                                                                                 <a asp-action="Productpage" asp-controller="Products" asp-route-id="@item.Product.ProductId"> <img src="@Html.DisplayFor(modelItem => item.Product.Imagepath)" alt="">  </a>
                                                                             </div>
                                                                             <div class="media-body">
-                                                                                <a asp-action="Productpage" asp-controller="Products" asp-route-id="@item.Product.ProductId"> <p>@Html.DisplayFor(modelItem => item.Product.Name)</p>  </a>
+                                                                                <br />
+                                                                                <p asp-actionasp-action="Productpage" asp-controller="Products" asp-route-id="@item.Product.ProductId"><h4>@Html.DisplayFor(modelItem => item.Product.Name)</h4> </p>
+                                                                               
+                                                                                    
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -93,7 +96,7 @@
                                                                                 <!--================Lower Area =================-->
                                                                                 <tr class="bottom_button">
                                                                                     <td>
-                                                                                        <a class="genric-btn danger radius" href="/Cart/EmptyCart">Empty Cart</a>
+                                                                                        <a class="btn genric-btn danger radius" href="/Cart/EmptyCart">Empty Cart</a>
                                                                                     </td>
                                                                                     <td></td>
                                                                                     <td><h5>Total</h5></td>
@@ -107,7 +110,7 @@
                                                                                     <td>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <div class="cupon_text float-right">
+                                                                                        <div class="btn cupon_text float-right">
                                                                                             <a id="checkOut" class="btn_1" href="/Cart/Checkout">Proceed to checkout</a>
                                                                                         </div>
                                                                                     </td>

@@ -3,7 +3,8 @@
 
 
 <div class="container" style="max-width:1370px; ">
-    <h3>Products</h3>
+    <br />
+    <h2>Products</h2>
     <a class="btn" asp-action="Create">Create New Product</a>
     <div class="cart_inner">
         <div class="table-responsive">
@@ -45,11 +46,11 @@
 
             <td>
                 <div class="media">
-                    <div class="d-flex">
+                    <div class="d-flex ">
                         <a asp-action="Productpage" asp-controller="Products" asp-route-id="@item.ProductId"> <img src="@Html.DisplayFor(modelItem => item.Imagepath)" alt="" width="100" height="100">  </a>
                     </div>
                     <div class="media-body">
-                        <a asp-action="Productpage" asp-controller="Products" asp-route-id="@item.ProductId"> <p>@Html.DisplayFor(modelItem => item.Name) <br /> @Html.DisplayFor(modelItem => item.Description)</p>  </a>
+                        <a asp-action="Productpage" asp-controller="Products" asp-route-id="@item.ProductId"> <h4>@Html.DisplayFor(modelItem => item.Name)</h4> <br /><h5  style="font-family:'Baskerville Old Face'"> @Html.DisplayFor(modelItem => item.Description)</h5>  </a>
                     </div>
                 </div>
             </td>
