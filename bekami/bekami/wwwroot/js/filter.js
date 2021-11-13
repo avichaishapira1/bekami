@@ -13,7 +13,7 @@
                 success: function (data) {
                     $('tbody').empty()
                     $('table').fadeIn(300);
-                    $('#restuls').tmpl(data).appendTo('tbody');
+                    $('#results').tmpl(data).appendTo('tbody');
 
                 }
             });

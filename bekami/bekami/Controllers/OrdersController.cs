@@ -82,7 +82,9 @@ namespace bekami.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Admin()
         {
-            return View(await _context.Order.ToListAsync());
+            var order = await _context.Order.Include(o => o.User)
+                .Include(o => o.ProductsOrdered).ToListAsync();
+            return View(order);
         }
 
 
@@ -249,6 +251,5 @@ namespace bekami.Controllers
                 .Select(x => new { Created = x.Key, Users = x.Count() }).ToListAsync();
             return Json(Usersinmonth);
         }
-        ///-----------------------------------------------------------------------------------------------------------------//
     }
 }

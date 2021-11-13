@@ -115,7 +115,6 @@ namespace bekami.Controllers
             {
                 _context.Add(order);
 
-                //coping CartItem into OrderProduct
                 var cartItems = _context.CartItem.Where(i => i.Cart == cart).Include(p => p.Product);
                 foreach (CartItem item in cartItems)
                 {
@@ -136,24 +135,9 @@ namespace bekami.Controllers
             return View(order);
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
 
-
-
-
-
-
-
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///
-        ///                                                    ADD, Update, Empty, Cart Items
-        ///*Mehods Should Be In Sync!!!                                                    
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        //Get [Product ID] and add it as CartItem to ShoppingCart, if already there ->Quantity++  (Limit to 5 items from the same product!)
+        // Admin...
         public IActionResult AddToCart(int productId)
         {
             var product = _context.Product.FirstOrDefault(i => i.ProductId == productId);
@@ -165,31 +149,22 @@ namespace bekami.Controllers
 
             var cart = GetShoppingCart();
 
-            //checking if ShoppingCart item for this product exists, If no => create CartItem and place inside ShoppingCart
             var cartItem = _context.CartItem.Include(p => p.Product)
                 .Include(p => p.Cart).FirstOrDefault(i => i.Cart == cart);
             if (cartItem == null)
             {
-                //if reaced here: Products exists, CartItem doesnt => Create CartItem for this product!
                 cartItem = new CartItem { Product = product, UnitPrice = product.Price, Cart = cart };
                 _context.CartItem.Add(cartItem);
                 _context.SaveChanges();
             }
 
-
-
-            //If reached here: The CartItem realted to the product is already inside the cart => update Quantity, MAX TO 5!
-            if (cartItem.Quantity + 1 > 5)
-            {
-
-                return Json("Sorry, we cannot add another " + cartItem.Product.Name + " to your cart as you've already added the maximum amount of 5");
-            }
+            
             else
             {
                 cartItem.Quantity++;
                 _context.SaveChanges();
 
-                return Json(cartItem.Product.Name + " added to your cart");
+                return View("../Products/Shop");
 
             }
         }
