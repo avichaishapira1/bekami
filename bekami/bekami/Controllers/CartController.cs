@@ -31,7 +31,6 @@ namespace bekami.Controllers
         {
             var cart = GetShoppingCart();
 
-            //if entering the cart and one items became out of stock , we implement here and not in ProductsController beacuase product can be in out of stock and then back, we dont want to delete for good
             var itemsList = _context.CartItem.Where(i => i.Cart.CartId == cart.CartId).Include(c => c.Product);
             foreach (var item in itemsList)
                 if (item.Product.IsAvailable == false)
@@ -49,12 +48,10 @@ namespace bekami.Controllers
         [Authorize]
         public IActionResult Checkout()
         {
-            //if u try to checkout with 0 items
             var cart = GetShoppingCart();
             if (GetNumOfItems() == 0)
                 return RedirectToAction(nameof(Index));
 
-            //if entering the checkout and one items became out of stock
             var itemsList = _context.CartItem.Where(i => i.Cart.CartId == cart.CartId).Include(c => c.Product);
             foreach (var item in itemsList)
                 if (item.Product.IsAvailable == false)
@@ -67,9 +64,8 @@ namespace bekami.Controllers
         }
 
 
-        //return table summary[html] of the shoppingcart(used in checkout) , because we using Order, cartItem, ShoppingCart controllers x3 and 1 view!
         [Authorize]
-        public async Task<IActionResult> Table()
+        public async Task<IActionResult> Summary()
         {
             var cart = GetShoppingCart();
             ViewBag.Total = GetTotalPrice();
@@ -78,20 +74,17 @@ namespace bekami.Controllers
 
 
         // POST: Create Orders
-        //Create an Order and OredDetails (copy the shoppingcart + get address from user)
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
         public IActionResult Checkout([Bind("Id,Email,Address,ZipCode,PhoneNumber,CreditCardNum")] Order order)
         {
-            //if u try to checkout with 0 items
             var NumOfItems = GetNumOfItems();
             var cart = GetShoppingCart();
             if (NumOfItems == 0)
                 return RedirectToAction(nameof(Index));
 
 
-            //if one product is out of stock or deleted let view the cart again
             var itemsList = _context.CartItem.Where(i => i.Cart.CartId == cart.CartId).Include(c => c.Product);
             foreach (var item in itemsList)
                 if (item.Product.IsAvailable == false || item.Product == null)
@@ -159,19 +152,17 @@ namespace bekami.Controllers
             }
 
             
-            else
-            {
-                cartItem.Quantity++;
-                _context.SaveChanges();
+      
+            cartItem.Quantity++;
+            _context.SaveChanges();
 
-                return View("../Products/Shop");
+            return View("../Products/Shop");
 
-            }
+            
         }
 
 
 
-        //Get [CartItem ID] and add update its quantity, quantity per product for customer is 5!
         public IActionResult UpdateItemQuantity(int cartItemId, int quantity)
         {
             if (quantity > 5 || quantity < 0)
@@ -180,12 +171,10 @@ namespace bekami.Controllers
 
             var cart = GetShoppingCart();
 
-            //checking if ShoppingCart item exists and its inside the cart.
             var cartItem = _context.CartItem.Include(p => p.Product).FirstOrDefault(i => i.Cart.CartId == cart.CartId && i.ItemId == cartItemId);
-            if (cartItem == null)//item not exist => put item inside ShoppingCart
+            if (cartItem == null)
                 return Json("NOT EXISTS!");
 
-            //If we reached here: the item inside the cart => and we need to update the Quantity
             if (quantity == 0)
             {
                 _context.CartItem.Remove(cartItem);
@@ -201,11 +190,9 @@ namespace bekami.Controllers
         }
 
 
-        //Empty The Cart, DA!
         public IActionResult EmptyCart()
         {
             var cart = GetShoppingCart();
-            //returns a list of all CartItems that Associated to Customer ShoppingCart
             var cartItems = _context.CartItem.Where(i => i.Cart.CartId == cart.CartId);
             foreach (var item in cartItems)
                 _context.CartItem.Remove(item);
@@ -213,7 +200,6 @@ namespace bekami.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

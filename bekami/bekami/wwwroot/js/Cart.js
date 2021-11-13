@@ -1,14 +1,7 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-//Made By: David Manshari! at 4am :(
-
-// Write your JavaScript code.
-
+﻿
 
 $(function ()
 {
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Change Quantity Selection code
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     $(".mdb-select").on('change', function () {  //the dropbox select
         var cartItemId = $(this).attr("id"); //get cartItem Id
@@ -34,12 +27,10 @@ $(function ()
             data: { cartItemId: cartItemId, quantity: quantity },
             success: function (data) {
 
-                //if server return this message, display it
                 var message = "Sorry it doesn't exists";
                 if (data == message)
                     alert("You can't delete it, because it doesn't exsits");
 
-                //update shoppingcart counter, if no items in cart(0) reload page so we get "your cart is empty page"
                 var jqxhr = $.get("/Cart/GetNumOfItems")
                     .done(function (data) {
                         if (data == 0) {

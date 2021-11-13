@@ -7,20 +7,16 @@
 $(function () {
 
 
-    //Load the right table with cartitems and total price
-    $('#insertHTML').load("/Cart/Table");
+    $('#insertHTML').load("/Cart/Summary");
 
-   //Make an Order button, active only if checkbox is checked!
     $("#Confirm").click(function () {
-        $("#DetailsForm").submit();
+        $("#Summary").submit();
        
     });
 
 
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //RunEffects code
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
 
     //used for show
     function ShowEffect(Area, effectType) {

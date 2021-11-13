@@ -17,10 +17,7 @@ $(function () {
 
         var arr = [];
         for (var k in data) {
-            arr.push({
-                Created: data[k].Created[k].month,
-                Users: data[k]
-            });
+            arr.push(data[k]);
         }
         return arr;
     }
@@ -47,10 +44,10 @@ $(function () {
 
         //creating the line
         var line = d3.line()
-            .x(function (d) { return x(d.Created) })
-            .y(function (d) { return y(d.Users) });
-        x.domain(d3.extent(data2, function (d) { return d.Created }));
-        y.domain(d3.extent(data2, function (d) { return d.Users }));
+            .x(function (d) { return x(d.created) })
+            .y(function (d) { return y(d.users) });
+        x.domain(d3.extent(data2, function (d) { return d.created }));
+        y.domain(d3.extent(data2, function (d) { return d.users }));
 
         //x - scale 
         g.append("g")

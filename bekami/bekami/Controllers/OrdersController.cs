@@ -20,14 +20,8 @@ namespace bekami.Controllers
         {
             _context = context;
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///
-        ///                                                                 Customer Area:
-        ///                                                  
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // show my orders(index for specific account)
+        
+       
         public async Task<IActionResult> MyOrders()
         {
             if (User.Claims.FirstOrDefault(c => c.Type == "userEmail") == null)
@@ -39,7 +33,6 @@ namespace bekami.Controllers
             return View(await _context.Order.Where(i => i.User == user).ToListAsync());
         }
 
-        // show my order(order for specific account) get Detail ID!
         public async Task<IActionResult> MyProducts(int? id)
         {
             if (User.Claims.FirstOrDefault(c => c.Type == "userEmail") == null)
@@ -71,11 +64,7 @@ namespace bekami.Controllers
 
 
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///
-        ///                                                           Admin Management:
-        ///                                                  
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       //admin...
 
         
         
@@ -191,7 +180,6 @@ namespace bekami.Controllers
             var order = await _context.Order.FindAsync(id);
             var orderDetails = _context.OrderProduct.Where(i => i.Order.Id == id);
 
-            //we also deleting all orderDetails assosiated with the order
             foreach (var item in orderDetails)
                 _context.OrderProduct.Remove(item);
 
@@ -248,7 +236,7 @@ namespace bekami.Controllers
         public async Task<IActionResult> Usersinmonth()
         {
             var Usersinmonth = await _context.User.GroupBy(x => new { month = x.Created.Month})
-                .Select(x => new { Created = x.Key, Users = x.Count() }).ToListAsync();
+                .Select(x => new { Created = x.Key.month, Users = x.Count() }).ToListAsync();
             return Json(Usersinmonth);
         }
     }

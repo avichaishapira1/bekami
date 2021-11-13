@@ -27,7 +27,7 @@
                     <br />
                     <i style="font-size:14px; color: #415094; font-weight: 500;">Shipping Details</i>
 
-                    <form id="DetailsForm" class="row contact_form" asp-action="Checkout" method="post">
+                    <form id="Summary" class="row contact_form" asp-action="Checkout" method="post">
                         <div class="col-md-6 form-group p_star">
                             <input asp-for="PhoneNumber" class="form-control" placeholder="Phone number">
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
@@ -42,67 +42,26 @@
                         </div>
                         
 
-                        <!--================Terms&Conditions=================-->
                         <div class="col-md-12 form-group">
                         </div>
                         <div class="col-md-12 form-group">
                             <h2>Terms & Conditions</h2>
                             <p>
-                             
-
+                                Please be nice!
                             </p>
                         </div>
                     </form>
 
 
-                    <!--================Spaces=================-->
-                    <div class="col-md-12 form-group">
-                    </div>
-                    <div class="col-md-12 form-group">
-                    </div>
-                    <div class="col-md-12 form-group">
-                    </div>
+                 
 
-                    <!--================Logos=================-->
-                    <div class="col-md-12 form-group">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="single_feature_part">
-                                    <img src="~/assets/img/icon/feature_icon_1.svg" alt="#">
-                                    <h4>Credit Card Support</h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="single_feature_part">
-                                    <img src="~/assets/img/icon/feature_icon_2.svg" alt="#">
-                                    <h4>Online Order</h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="single_feature_part">
-                                    <img src="~/assets/img/icon/feature_icon_3.svg" alt="#">
-                                    <h4>Free Delivery</h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="single_feature_part">
-                                    <img src="~/assets/img/icon/feature_icon_4.svg" alt="#">
-                                    <h4>Product with Gift</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--================END FORM=================-->
-
-                </div>
+                
 
 
-                <!--================RIGHT SIDE Table Items List=================-->
                 <div class="col-lg-4">
                     <div class="order_box">
                         <i style="font-size:14px; color: #415094; font-weight: 500;">Your Order</i>
                         <div class="RetriveFromShoppingCartsTableUsingJS" id="insertHTML">
-                            <!--================This are will be inserted from Table.html with JS beacause dealing with 2 models(cart+Orders) is 2 much=================-->
                         </div>
 
                         <a class="btn_3" id="Confirm" href="#" onClick="return false;">Order</a>
