@@ -1,0 +1,14 @@
+﻿@model IEnumerable<bekami.Models.Product>
+@{ ViewData["Title"] = "statistics";
+}
+
+<h2>Dashboard</h2>
+<svg class="line-chart"></svg>
+
+
+@section Scripts
+ {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="~/js/Statisticsjs.js"></script>
+}

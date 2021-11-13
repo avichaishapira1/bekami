@@ -236,7 +236,19 @@ namespace bekami.Controllers
 
             return Json(query);
         }
+        //-----------------------------------------------------------------------------------------------------------------//
+        //statistics
+        public IActionResult Statistics()
+        {
+            return View();
+        }
 
-
+        public async Task<IActionResult> Usersinmonth()
+        {
+            var Usersinmonth = await _context.User.GroupBy(x => new { month = x.Created.Month})
+                .Select(x => new { Created = x.Key, Users = x.Count() }).ToListAsync();
+            return Json(Usersinmonth);
+        }
+        ///-----------------------------------------------------------------------------------------------------------------//
     }
 }

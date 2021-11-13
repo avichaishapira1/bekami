@@ -5,73 +5,76 @@
     ViewData["Title"] = "Shop";
 }
 
-<!--=Create a sort navbar =-->
-<nav>
-    <div class="navbar">
-       
-      
-                
-        <select id="Size" class="btn " asp-items="@ViewBag.Size">
-            <option value="null" hidden>Size</option>
-            <option value="@Size.S">Small</option>
-            <option value="@Size.M">Medium</option>
-            <option value="@Size.L">Large</option>
-            <option value="@Size.XL">X.Large</option>
-        </select>
-       
-        
-        <select id="Gender" class="btn " asp-items="@ViewBag.Gender">
-            <option value="null" hidden>Gender</option>
-            <option value="@Gender.man">Man</option>
-            <option value="@Gender.woman">Woman</option>
-        </select>
-
-        <select id="Color" class="btn" asp-items="@ViewBag.ColorId">
-            <option value="null" hidden>Select color</option>
-        </select>
-    </div>
-
-    
-    <div class="navbar-nav " style="padding: 7px 10px 50px 10px;" >
-
-        <select id="Sort" class="btn custom-select-lg">
-
-            <option value="null" hidden>Sort</option>
-            <option value="alphabetical">Alphabetical</option>
-            <option value="low2high">Price low to high</option>
-            <option value="high2low">Price high to low</option>
-        </select>
-    </div>
-</nav>
-
 
 <section>
-    <div class=" row row-cols-1 row-cols-md-2">
-        <div class="card-deck carousel-control">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <select id="ColorId" class="select" asp-items="@ViewBag.ColorId">
+                <option value="0">All</option>
+            </select>
 
-            @foreach (var item in Model)
-            {
-            <div class="card" style="width: 15rem;">
-                <img src=@item.Imagepath class="card-img-top">
-                <div class="card-body">
-                    <a class="btn btn-light"  style="color:lightpink; background-color:white" asp-action="ProductPage" asp-route-id="@item.ProductId">
-                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
-                    </a>
-                    <p class="card-text">
-                        @Html.DisplayFor(modelItem => item.Description)
-                        @Html.DisplayFor(modelItem => item.Tags)
-                        @Html.DisplayFor(modelItem => item.Category)
-                    </p>
+            <select id="CategoryId" class="select" asp-items="@ViewBag.CategoryId">
+                <option value="0">All</option>
+            </select>
+        </div>
+        <div class="select-this d-flex">
+            <select id="Sort" class="select">
+                <option value="null" disabled selected>Sort</option>
+                <option value="newest">Newest</option>
+                <option value="alphabetical">Alphabetical</option>
+                <option value="low2high">Price low to high</option>
+                <option value="high2low">Price high to low</option>
+            </select>
+        </div>
+    </nav>
 
-                </div>
-                <div class="card-text price">
-                    price: @Html.DisplayFor(modelItem => item.Price) ₪
-                </div>
-                <a asp-> 
-                <h3 class="btn btn-light" style="color:lightpink; background-color:white" >Buy now</h3>
-                </a>
+
+
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="row" id="productInsert">
+
+                <!-- JS Insert Products HERE! -->
+
             </div>
-            }
         </div>
     </div>
+    <div class="form-group" style="text-align: center;" id="showMoreButton">
+        <button id="ShowMoreProducts" class="button button-contactForm btn_1 boxed-btn">Show More Products</button>
+    </div>
 </section>
+
+@section Scripts
+ {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+
+    /<script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script src="~/js/ProductJs.js"></script>
+     
+
+    <!--================HERE THE JS Products RESULT THAT WILL INSERT IN <div class="comment-list">!=================-->
+    <script id="resultsProdcuts" type="text/html">
+        <div class="col-xl-4 col-lg-4 col-md-6">
+            <div class="mb-60">
+                <div >
+                    <a href="/Products/Productpage/${productId}">
+                        <img src="${imagepath}" width="370" height="403" alt="">
+                    </a>
+                </div>
+
+                <div class="product-caption">
+                    <h4><a href="/Products/Productpage/${productId}">${name}</a></h4>
+                    <div class="price">
+                        <ul>
+                            <li>₪${price}</li>
+                            <li>Size: ${size}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+}
