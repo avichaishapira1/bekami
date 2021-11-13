@@ -239,5 +239,12 @@ namespace bekami.Controllers
                 .Select(x => new { Created = x.Key.month, Users = x.Count() }).ToListAsync();
             return Json(Usersinmonth);
         }
+
+        public async Task<IActionResult> Ordersinmonth()
+        {
+            var Ordersinmonth = await _context.Order.GroupBy(x => new { month = x.Created.Month })
+                .Select(x => new { Created = x.Key.month, Orders = x.Count() }).ToListAsync();
+            return Json(Ordersinmonth);
+        }
     }
 }
