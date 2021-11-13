@@ -12,22 +12,22 @@ a.navbar-brand {
     
 }
 
+
 .content {
     max-width: 800px;
     margin: auto;
 }
 
 
-.btn{
+.btn {
     color: #fff;
-    background-color: #000;
+    background-color: rgb(200,173,126);
     border-color: #fff;
     opacity: 0.7;
     font-style: italic;
     justify-content: center;
     border-block-color: none;
-    
-   }
+}
 
 
 .card btn:hover {
@@ -76,9 +76,11 @@ body {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
+    
     background-color: #f4c5fc;
     border-color: #ebc7ed;
+    lighting-color: brown;
+    color:rosybrown;
 }
 
 /* Sticky footer styles
@@ -119,6 +121,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  
 }
 
 
@@ -135,7 +138,18 @@ body {
     
 }
 /*home page design*/
+.nav-link:any-link
+{
+    color:lightpink;
+    opacity:1;
+    
+}
+.nav-item::marker{
 
+    color:saddlebrown;
+ 
+
+}
 .column {
     float: left;
     width: 50%;
@@ -154,7 +168,10 @@ hr {
     visibility: hidden;
 }
 
+
 .dropdown {
     position: relative;
     display: inline-block;
+    
 }
+
