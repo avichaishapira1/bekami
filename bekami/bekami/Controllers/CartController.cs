@@ -78,7 +78,7 @@ namespace bekami.Controllers
 
 
         // POST: Create Orders
-        //Create an Order and OredDetails (copy the shoppingcart + get adress from user)
+        //Create an Order and OredDetails (copy the shoppingcart + get address from user)
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]

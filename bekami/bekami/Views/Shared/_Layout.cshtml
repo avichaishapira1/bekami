@@ -27,13 +27,16 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Aboutus">ABOUT US</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">PRIVACY</a>
+                        </li>
                     </ul>
 
 
                     @using (Html.BeginForm("Shop", "Products", FormMethod.Get))
                     {
                         <input id="search" type="text" name="searchString" />
-                        <input type="submit" value="Search" />
+                        <input id="search" type="submit" value="Search" />
                     }
                     @{Html.EndForm(); }
                 </div>
@@ -49,7 +52,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="nav-link  atext-light" asp-area="" asp-controller="User" asp-action="MyAccount">My Account</a>
                                 <a class="nav-link  atext-light" asp-area="" asp-controller="Orders" asp-action="MyOrders">My Orders</a>
-
+                                <a class="nav-link  atext-light" asp-area="" asp-controller="Orders" asp-action="Statistics">Dashboard</a>
                                 <a class="nav-link  atext-light" asp-area="" asp-controller="Cart" asp-action="Index">My Cart</a>
 
                                 <div class="header-info-right">
@@ -110,6 +113,7 @@
             &copy; 2021 - Bekami -
         </div>
     </footer>
+    <script src="~/js/Site.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>

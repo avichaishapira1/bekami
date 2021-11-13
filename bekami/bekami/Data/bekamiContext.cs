@@ -22,9 +22,7 @@ namespace bekami.Data
         public DbSet<bekami.Models.Color> Color { get; set; }
         public DbSet<bekami.Models.OrderProduct> OrderProduct { get; set; }
         public DbSet<bekami.Models.Order> Order { get; set; }
-        
         public DbSet<bekami.Models.Cart> Cart { get; set; }
-        
         public DbSet<bekami.Models.CartItem> CartItem { get; set; }
 
 

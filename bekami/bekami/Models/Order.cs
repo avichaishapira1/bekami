@@ -41,7 +41,7 @@ namespace bekami.Models
 
         [DisplayName("Order status")] public OrderStatus Status { get; set; }
         [ForeignKey("User")]
-        public User UserId { get; set; }
+        public User User { get; set; }
 
         public ICollection<OrderProduct> ProductsOrdered { get; set; }
 

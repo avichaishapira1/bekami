@@ -20,24 +20,30 @@ namespace bekami.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> index()
+        {
+            return View(await _context.Product.Where(p => p.Name != "Not Found").Include(i => i.Color).ToListAsync());
+        }
         //showing Products on shop page 
         public async Task<IActionResult> Shop()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "Name");
-            ViewData["ColorId"] = new SelectList(_context.Color, "ColorId", "Name");
+            ViewBag.CategoryId= new SelectList(await _context.Category.ToListAsync(), "CategoryId", "Name");
+            ViewBag.ColorId = new SelectList(await _context.Color.ToListAsync(), "ColorId", "Name");
+            ViewBag.Gender = new SelectList(Enum.GetValues(typeof(Gender)));
+            ViewBag.Size = new SelectList(Enum.GetValues(typeof(Size)));
             return View();
         }
 
 
-        //[Route("/products/search")]
-        //public async Task<IActionResult> Shop(String searchString)
-        //{
-        //    var bekamiContext = _context.Product.Where(p => p.IsAvailable).Where(p => p.Name.Contains(searchString) || p.Description.Contains(searchString));
-        //    ViewData["ColorId"] = new SelectList(_context.Color, "ColorId", "Name");
-        //    ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "Name");
-        //    return View("Shop", await bekamiContext.ToListAsync());
-        //}
+        [Route("/products/search")]
+        public async Task<IActionResult> search(String searchString)
+        {
+            var bekamiContext = _context.Product.Where(p => p.IsAvailable).Where(p => p.Name.Contains(searchString) || p.Description.Contains(searchString));
+            ViewBag.CategoryId = new SelectList(await _context.Category.ToListAsync(), "CategoryId", "Name");
+            ViewBag.ColorId = new SelectList(await _context.Color.ToListAsync(), "ColorId", "Name");
+            return View("Shop", await bekamiContext.ToListAsync());
+        }
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -200,17 +206,21 @@ namespace bekami.Controllers
             return View(product);
         }
 
-        public async Task<IActionResult> getProducts(string search, int colorid, int categoryId, string sort, int skipCount, int takeCount)
+        
+
+
+
+        public async Task<IActionResult> getProducts(int colorid, int categoryId, string sort, int skipCount, int takeCount)
         {
             var products = await _context.Product.Where(p => p.IsAvailable).ToListAsync();
 
             //filters
 
             if (colorid != 0)
-                products.RemoveAll(b => b.Color.ColorId != colorid);
+                products.RemoveAll(b => b.ColorId!=colorid);
 
             if (categoryId != 0)
-                products.RemoveAll(c => c.Category.CategoryId != categoryId);
+                products.RemoveAll(c => c.CategoryId != categoryId);
 
             if (sort == "low2high")
                 products.Sort((a, b) => a.Price.CompareTo(b.Price));
@@ -227,16 +237,10 @@ namespace bekami.Controllers
             //by default the list ordered by newest
             if (sort == "newest" || sort == null)
                 products.Sort((a, b) => b.ProductId.CompareTo(a.ProductId));
-            if(search!=null)
-            {
-                var query= from p in _context.Product.Where(p => p.Name != "Not Found")
-                           where p.Name.Contains(search)
-                           select new { id = p.ProductId, label = p.Name, value = p.ProductId };
-                return Json(query.Skip(skipCount).Take(takeCount));
-            }
 
-      
-             return Json(products.Skip(skipCount).Take(takeCount));
+                         
+            return Json(products.Skip(skipCount).Take(takeCount));
+            
         }
     }
 }

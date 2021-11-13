@@ -8,20 +8,11 @@
 <section>
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-
-            @*<select id="Gender" class="select" asp-items="@Html.GetEnumSelectList(typeof(Gender))">
-                <option value="2">All</option>
-            </select>
-
-            <select id="Size" class="select" asp-items="@Html.GetEnumSelectList(typeof(Size))">
-                <option value="0" disabled selected>All</option>
-            </select>*@
-
-            <select id="Color" class="select" asp-items="@ViewBag.ColorId">
+            <select id="ColorId" class="select" asp-items="@ViewBag.ColorId">
                 <option value="0">All</option>
             </select>
 
-            <select id="Category" class="select" asp-items="@ViewBag.CategoryId">
+            <select id="CategoryId" class="select" asp-items="@ViewBag.CategoryId">
                 <option value="0">All</option>
             </select>
         </div>
@@ -57,7 +48,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
 
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    /<script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
     <script src="~/js/ProductJs.js"></script>
      
 
@@ -77,7 +68,6 @@
                         <ul>
                             <li>₪${price}</li>
                             <li>Size: ${size}</li>
-                            <li><a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="${productId}">Add to cart</a></li>
                         </ul>
                     </div>
                 </div>
